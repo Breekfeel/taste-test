@@ -54,7 +54,6 @@
   .btn-back { background: transparent; border: 1px solid var(--border); color: var(--muted); }
   .btn-back:hover { border-color: var(--muted); color: var(--text); }
 
-  /* Results */
   #results { display: none; animation: fadeIn 0.6s ease; }
   .result-header { text-align: center; margin-bottom: 40px; }
   .result-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; margin-bottom: 8px; }
@@ -66,22 +65,26 @@
   .bar-track { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
   .bar-fill { height: 100%; border-radius: 4px; width: 0%; transition: width 1s cubic-bezier(0.34,1.56,0.64,1); }
   .bar-pct { font-size: 0.8rem; color: var(--text); text-align: right; }
-
   .section-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-top: 20px; }
   .section-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 16px; }
   .insight-item { display: flex; gap: 12px; margin-bottom: 14px; font-size: 0.88rem; line-height: 1.5; align-items: flex-start; }
   .insight-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
 
-  /* Try grid - categories */
-  .try-category { margin-bottom: 20px; }
-  .try-cat-title { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent1); margin-bottom: 10px; opacity: 0.8; }
-  .try-grid { display: grid; gap: 8px; }
-  .try-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; transition: border-color 0.2s; }
+  /* Try grid with photos */
+  .try-grid { display: grid; gap: 12px; }
+  .try-item {
+    display: flex; align-items: stretch; overflow: hidden;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 12px; transition: border-color 0.2s;
+  }
   .try-item:hover { border-color: rgba(232,160,200,0.3); }
-  .try-item-icon { font-size: 1.4rem; flex-shrink: 0; }
-  .try-item-name { font-weight: 500; margin-bottom: 2px; font-size: 0.87rem; }
-  .try-item-why { color: var(--muted); font-size: 0.81rem; line-height: 1.4; }
-  .try-item-tag { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 100px; margin-top: 4px; background: rgba(232,160,200,0.1); border: 1px solid rgba(232,160,200,0.2); color: var(--accent1); }
+  .try-photo { width: 90px; min-height: 90px; flex-shrink: 0; background-size: cover; background-position: center; background-color: var(--border); overflow: hidden; }
+  .try-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.3s; }
+  .try-photo img.loading { opacity: 0; }
+  .try-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+  .try-item-name { font-weight: 500; font-size: 0.88rem; line-height: 1.3; }
+  .try-item-why { color: var(--muted); font-size: 0.8rem; line-height: 1.4; }
+  .try-item-tag { display: inline-block; font-size: 0.68rem; padding: 2px 8px; border-radius: 100px; margin-top: 4px; background: rgba(232,160,200,0.1); border: 1px solid rgba(232,160,200,0.2); color: var(--accent1); align-self: flex-start; }
 
   .superpower { background: linear-gradient(135deg, rgba(232,160,200,0.1), rgba(240,192,128,0.1)); border: 1px solid rgba(232,160,200,0.2); border-radius: 16px; padding: 24px; margin-top: 20px; text-align: center; }
   .superpower .label { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
@@ -94,7 +97,6 @@
   .share-link-text { flex: 1; font-size: 0.82rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .btn-copy { background: linear-gradient(135deg, var(--accent1), #c060a0); color: #0e0a0f; border: none; padding: 8px 16px; border-radius: 8px; font-size: 0.82rem; font-weight: 500; cursor: pointer; white-space: nowrap; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
   .btn-copy.copied { background: var(--accent2); }
-
   #compareView { display: none; animation: fadeIn 0.4s ease; margin-top: 16px; }
   .compare-legend { display: flex; gap: 20px; margin-bottom: 14px; font-size: 0.82rem; }
   .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle; }
@@ -105,9 +107,36 @@
   .compare-fill-friend { position: absolute; top: 0; left: 0; height: 100%; border-radius: 10px; opacity: 0.45; transition: width 1s cubic-bezier(0.34,1.56,0.64,1); }
   .compare-fill-me { position: absolute; top: 0; left: 0; height: 100%; border-radius: 10px; opacity: 0.85; transition: width 1s cubic-bezier(0.34,1.56,0.64,1); }
   .compare-diff { margin-top: 14px; padding: 12px 16px; background: rgba(255,255,255,0.03); border-radius: 10px; font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-
   .btn-restart { display: block; margin: 36px auto 0; background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 10px 24px; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
   .btn-restart:hover { border-color: var(--muted); color: var(--text); }
+  .menu-section { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-top: 20px; }
+  .menu-section h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 4px; }
+  .menu-subtitle { color: var(--muted); font-size: 0.83rem; margin-bottom: 20px; }
+  .meal-block { margin-bottom: 20px; }
+  .meal-block:last-child { margin-bottom: 0; }
+  .meal-time { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent3); margin-bottom: 10px; opacity: 0.9; }
+  .meal-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .meal-header { display: flex; align-items: stretch; }
+  .meal-photo { width: 88px; flex-shrink: 0; background: var(--border); background-size: cover; background-position: center; overflow: hidden; min-height: 88px; }
+  .meal-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.3s; }
+  .meal-photo img.loading { opacity: 0; }
+  .meal-photo-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+  .meal-info { padding: 14px 16px; flex: 1; }
+  .meal-name { font-weight: 500; font-size: 0.95rem; margin-bottom: 4px; }
+  .meal-why { color: var(--muted); font-size: 0.8rem; line-height: 1.4; margin-bottom: 8px; }
+  .meal-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .meal-tag { font-size: 0.68rem; padding: 2px 8px; border-radius: 100px; background: rgba(144,200,232,0.1); border: 1px solid rgba(144,200,232,0.2); color: var(--accent4); }
+  .meal-tag.easy { background: rgba(168,216,176,0.1); border-color: rgba(168,216,176,0.2); color: var(--accent2); }
+  .meal-tag.new { background: rgba(232,160,200,0.1); border-color: rgba(232,160,200,0.2); color: var(--accent1); }
+  .recipe-toggle { width: 100%; background: none; border: none; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; padding: 10px 16px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'DM Sans', sans-serif; transition: color 0.2s; }
+  .recipe-toggle:hover { color: var(--text); }
+  .recipe-body { display: none; padding: 14px 16px; border-top: 1px solid var(--border); animation: fadeIn 0.2s ease; }
+  .recipe-body.open { display: block; }
+  .recipe-ingredients { font-size: 0.82rem; color: var(--muted); margin-bottom: 12px; line-height: 1.7; }
+  .recipe-ing-title { font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; color: var(--accent1); margin-bottom: 6px; opacity: 0.8; }
+  .recipe-steps-title { font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; color: var(--accent1); margin-bottom: 6px; opacity: 0.8; }
+  .recipe-step { display: flex; gap: 10px; margin-bottom: 6px; font-size: 0.82rem; line-height: 1.5; }
+  .step-num { color: var(--accent1); font-weight: 600; flex-shrink: 0; min-width: 16px; }
   .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--card); border: 1px solid var(--border); padding: 12px 24px; border-radius: 100px; font-size: 0.85rem; transition: transform 0.3s ease; z-index: 99; pointer-events: none; }
   .toast.show { transform: translateX(-50%) translateY(0); }
 </style>
@@ -116,18 +145,15 @@
 <div class="wrap">
   <div class="header">
     <h1>Вкусовой профиль</h1>
-    <p id="headerSub">24 вопроса · ~7 минут</p>
+    <p id="headerSub">25 вопросов · ~8 минут</p>
   </div>
   <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
 
   <div id="quiz">
-
-    <!-- БЛОК 1: БАЗОВЫЕ ВКУСЫ -->
     <div class="question-block active" data-q="0">
-      <div class="q-section">Базовые вкусы</div>
-      <div class="q-number">Вопрос 1 из 24</div>
-      <div class="q-text">Ты ешь лимон или лайм без сахара</div>
-      <div class="q-sub">Чистая кислота, никаких добавок</div>
+      <div class="q-section">Базовые вкусы</div><div class="q-number">Вопрос 1 из 25</div>
+      <div class="q-text">Ты ешь лимон или лайм без сахара — какова реакция?</div>
+      <div class="q-sub">Чистая кислота — без мёда, без ничего</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="sour"><span class="opt-emoji">😍</span><span class="opt-label">Обожаю, могу есть просто так</span></button>
         <button class="opt" data-val="4" data-cat="sour"><span class="opt-emoji">😊</span><span class="opt-label">Нравится, щиплет приятно</span></button>
@@ -135,12 +161,10 @@
         <button class="opt" data-val="0" data-cat="sour"><span class="opt-emoji">🙅</span><span class="opt-label">Не могу, слишком резко</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="1">
-      <div class="q-section">Базовые вкусы</div>
-      <div class="q-number">Вопрос 2 из 24</div>
-      <div class="q-text">Тёмный шоколад 85%+</div>
-      <div class="q-sub">Интенсивная горечь, минимум сладкого</div>
+      <div class="q-section">Базовые вкусы</div><div class="q-number">Вопрос 2 из 25</div>
+      <div class="q-text">Горький шоколад — как тебе?</div>
+      <div class="q-sub">Тёмный 75%+, почти без сладкого. Если не пробовал — представь очень горький вкус</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="bitter"><span class="opt-emoji">🍫</span><span class="opt-label">Это лучшее, что есть</span></button>
         <button class="opt" data-val="3" data-cat="bitter"><span class="opt-emoji">🤔</span><span class="opt-label">Ок, но лучше послаще</span></button>
@@ -148,12 +172,10 @@
         <button class="opt" data-val="0" data-cat="bitter"><span class="opt-emoji">🤢</span><span class="opt-label">Вообще не могу</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="2">
-      <div class="q-section">Базовые вкусы</div>
-      <div class="q-number">Вопрос 3 из 24</div>
-      <div class="q-text">Насколько ты чувствительна к сладкому?</div>
-      <div class="q-sub">Маленькая конфета — много или нормально?</div>
+      <div class="q-section">Базовые вкусы</div><div class="q-number">Вопрос 3 из 25</div>
+      <div class="q-text">Ты чувствительна к сладкому?</div>
+      <div class="q-sub">Одна конфета или печенье — тебе этого хватает, или хочется ещё?</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="sweet"><span class="opt-emoji">🍬</span><span class="opt-label">Одна конфета — уже сладко, хватает мало</span></button>
         <button class="opt" data-val="4" data-cat="sweet"><span class="opt-emoji">🍭</span><span class="opt-label">Чувствую хорошо, но хочу ещё</span></button>
@@ -161,12 +183,10 @@
         <button class="opt" data-val="2" data-cat="sweet"><span class="opt-emoji">😐</span><span class="opt-label">Сладкое почти не ощущаю</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="3">
-      <div class="q-section">Базовые вкусы</div>
-      <div class="q-number">Вопрос 4 из 24</div>
-      <div class="q-text">Острая еда — чили, халапеньо</div>
-      <div class="q-sub">Оцени реакцию честно</div>
+      <div class="q-section">Базовые вкусы</div><div class="q-number">Вопрос 4 из 25</div>
+      <div class="q-text">Острая еда — перец, аджика, острый кетчуп</div>
+      <div class="q-sub">Или корейская лапша, чипсы «огонь» — всё что жжёт</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="spicy"><span class="opt-emoji">🌶️</span><span class="opt-label">Люблю жжение, чем острее — тем лучше</span></button>
         <button class="opt" data-val="3" data-cat="spicy"><span class="opt-emoji">🔥</span><span class="opt-label">Немного остроты — окей, много — нет</span></button>
@@ -174,12 +194,10 @@
         <button class="opt" data-val="0" data-cat="spicy"><span class="opt-emoji">❌</span><span class="opt-label">Избегаю полностью</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="4">
-      <div class="q-section">Базовые вкусы</div>
-      <div class="q-number">Вопрос 5 из 24</div>
-      <div class="q-text">Пармезан, мисо, насыщенный бульон — умами</div>
-      <div class="q-sub">Глубокий, «мясной» вкус</div>
+      <div class="q-section">Базовые вкусы</div><div class="q-number">Вопрос 5 из 25</div>
+      <div class="q-text">Умами — насыщенный «глубокий» вкус в еде</div>
+      <div class="q-sub">Мясной бульон, жареное мясо, сыр, соевый соус — сытное и тягучее ощущение во рту</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="umami"><span class="opt-emoji">🧀</span><span class="opt-label">Это мой любимый вкус</span></button>
         <button class="opt" data-val="4" data-cat="umami"><span class="opt-emoji">😋</span><span class="opt-label">Нравится, делает еду вкуснее</span></button>
@@ -187,11 +205,10 @@
         <button class="opt" data-val="1" data-cat="umami"><span class="opt-emoji">😕</span><span class="opt-label">Не очень, кажется тяжёлым</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="5">
-      <div class="q-section">Базовые вкусы</div>
-      <div class="q-number">Вопрос 6 из 24</div>
-      <div class="q-text">Ты кладёшь соль в еду?</div>
+      <div class="q-section">Базовые вкусы</div><div class="q-number">Вопрос 6 из 25</div>
+      <div class="q-text">Ты досаливаешь еду?</div>
+      <div class="q-sub">Суп, яичница, макароны — берёшь солонку или нет?</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="salty"><span class="opt-emoji">🧂</span><span class="opt-label">Всегда досаливаю, без неё пресно</span></button>
         <button class="opt" data-val="4" data-cat="salty"><span class="opt-emoji">👌</span><span class="opt-label">Нравится, но не злоупотребляю</span></button>
@@ -199,13 +216,10 @@
         <button class="opt" data-val="0" data-cat="salty"><span class="opt-emoji">🚫</span><span class="opt-label">Избегаю солёного</span></button>
       </div>
     </div>
-
-    <!-- БЛОК 2: НАПИТКИ -->
     <div class="question-block" data-q="6">
-      <div class="q-section">Напитки</div>
-      <div class="q-number">Вопрос 7 из 24</div>
-      <div class="q-text">Кофе без сахара — как ощущается горечь?</div>
-      <div class="q-sub">Эспрессо или американо, без ничего</div>
+      <div class="q-section">Напитки</div><div class="q-number">Вопрос 7 из 25</div>
+      <div class="q-text">Кофе без сахара — как тебе горечь?</div>
+      <div class="q-sub">Американо, эспрессо — пьёшь как есть или обязательно добавляешь сахар/молоко?</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="bitter"><span class="opt-emoji">☕</span><span class="opt-label">Пью только так, горечь = вкус</span></button>
         <button class="opt" data-val="3" data-cat="bitter"><span class="opt-emoji">🙂</span><span class="opt-label">Терплю, но лучше с молоком/сахаром</span></button>
@@ -213,36 +227,31 @@
         <button class="opt" data-val="0" data-cat="bitter"><span class="opt-emoji">🙅</span><span class="opt-label">Не пью кофе из-за горечи</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="7">
-      <div class="q-section">Напитки</div>
-      <div class="q-number">Вопрос 8 из 24</div>
-      <div class="q-text">Какой напиток ты выберешь?</div>
-      <div class="q-sub">Представь что жарко и хочется пить</div>
+      <div class="q-section">Напитки</div><div class="q-number">Вопрос 8 из 25</div>
+      <div class="q-text">Какой напиток выберешь?</div>
+      <div class="q-sub">Жарко, дома есть всё — что первым захочется?</div>
       <div class="options">
         <button class="opt" data-val="sour_drink" data-cat="drink_pref"><span class="opt-emoji">🍋</span><span class="opt-label">Лимонад или холодный чай с лимоном</span></button>
         <button class="opt" data-val="sweet_drink" data-cat="drink_pref"><span class="opt-emoji">🧃</span><span class="opt-label">Сладкий сок — манго, персик, яблоко</span></button>
         <button class="opt" data-val="bitter_drink" data-cat="drink_pref"><span class="opt-emoji">🫖</span><span class="opt-label">Холодный зелёный чай без сахара</span></button>
-        <button class="opt" data-val="umami_drink" data-cat="drink_pref"><span class="opt-emoji">🥤</span><span class="opt-label">Что-то несладкое — вода, минералка</span></button>
+        <button class="opt" data-val="plain_drink" data-cat="drink_pref"><span class="opt-emoji">🥤</span><span class="opt-label">Просто вода или минералка</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="8">
-      <div class="q-section">Напитки</div>
-      <div class="q-number">Вопрос 9 из 24</div>
-      <div class="q-text">Газированная вода — как ощущаешь пузырьки?</div>
+      <div class="q-section">Напитки</div><div class="q-number">Вопрос 9 из 25</div>
+      <div class="q-text">Газировка — нравятся пузырьки?</div>
+      <div class="q-sub">Боржоми, нарзан, кола — как ощущение пузырьков?</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="sensitivity"><span class="opt-emoji">🫧</span><span class="opt-label">Обожаю, без газа вода скучная</span></button>
         <button class="opt" data-val="3" data-cat="sensitivity"><span class="opt-emoji">💧</span><span class="opt-label">Нормально, пью и то и другое</span></button>
         <button class="opt" data-val="1" data-cat="sensitivity"><span class="opt-emoji">😬</span><span class="opt-label">Пузырьки раздражают, предпочитаю без газа</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="9">
-      <div class="q-section">Напитки</div>
-      <div class="q-number">Вопрос 10 из 24</div>
-      <div class="q-text">Кисломолочное — айран, тан, кефир</div>
-      <div class="q-sub">Кислое, немного солёное, жидкое</div>
+      <div class="q-section">Напитки</div><div class="q-number">Вопрос 10 из 25</div>
+      <div class="q-text">Кисломолочное — кефир, айран, катык</div>
+      <div class="q-sub">Кислое, немного терпкое — пьёшь с удовольствием или через силу?</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="sour"><span class="opt-emoji">🥛</span><span class="opt-label">Пью с удовольствием, освежает</span></button>
         <button class="opt" data-val="3" data-cat="sour"><span class="opt-emoji">🙂</span><span class="opt-label">Нормально, иногда пью</span></button>
@@ -250,50 +259,41 @@
         <button class="opt" data-val="0" data-cat="sour"><span class="opt-emoji">🙅</span><span class="opt-label">Вообще не пью такое</span></button>
       </div>
     </div>
-
-    <!-- БЛОК 3: АРОМАТЫ -->
     <div class="question-block" data-q="10">
-      <div class="q-section">Ароматы и запахи</div>
-      <div class="q-number">Вопрос 11 из 24</div>
-      <div class="q-text">Запах свежей выпечки — булочки, хлеб из духовки</div>
-      <div class="q-sub">Запах влияет на аппетит?</div>
+      <div class="q-section">Ароматы</div><div class="q-number">Вопрос 11 из 25</div>
+      <div class="q-text">Запах свежего хлеба или выпечки</div>
+      <div class="q-sub">Когда мимо булочной идёшь или бабушка достаёт из духовки — реагируешь?</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="sensitivity"><span class="opt-emoji">🍞</span><span class="opt-label">Сразу хочется есть, запах невыносимо вкусный</span></button>
         <button class="opt" data-val="3" data-cat="sensitivity"><span class="opt-emoji">😊</span><span class="opt-label">Приятно, но не бешеная реакция</span></button>
         <button class="opt" data-val="1" data-cat="sensitivity"><span class="opt-emoji">😶</span><span class="opt-label">Почти не замечаю запахи еды</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="11">
-      <div class="q-section">Ароматы и запахи</div>
-      <div class="q-number">Вопрос 12 из 24</div>
-      <div class="q-text">Запах чеснока и лука при жарке</div>
-      <div class="q-sub">Резкий, насыщенный аромат</div>
+      <div class="q-section">Ароматы</div><div class="q-number">Вопрос 12 из 25</div>
+      <div class="q-text">Запах когда жарят лук и чеснок</div>
+      <div class="q-sub">На сковородке — этот резкий горячий аромат на всю кухню</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="umami"><span class="opt-emoji">🧄</span><span class="opt-label">Люблю — значит будет вкусно</span></button>
         <button class="opt" data-val="3" data-cat="umami"><span class="opt-emoji">🙂</span><span class="opt-label">Нормально, привычный запах</span></button>
         <button class="opt" data-val="1" data-cat="umami"><span class="opt-emoji">😣</span><span class="opt-label">Резкий и неприятный</span></button>
-        <button class="opt" data-val="0" data-cat="umami"><span class="opt-emoji">🙅</span><span class="opt-label">Не переношу, стараюсь избегать</span></button>
+        <button class="opt" data-val="0" data-cat="umami"><span class="opt-emoji">🙅</span><span class="opt-label">Не переношу</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="12">
-      <div class="q-section">Ароматы и запахи</div>
-      <div class="q-number">Вопрос 13 из 24</div>
-      <div class="q-text">Цитрусовый аромат — апельсин, мандарин, грейпфрут</div>
-      <div class="q-sub">Свежий, яркий запах</div>
+      <div class="q-section">Ароматы</div><div class="q-number">Вопрос 13 из 25</div>
+      <div class="q-text">Запах апельсина или мандарина</div>
+      <div class="q-sub">Когда чистишь или режешь — этот яркий цитрусовый аромат</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="sour"><span class="opt-emoji">🍊</span><span class="opt-label">Один из любимых запахов</span></button>
         <button class="opt" data-val="3" data-cat="sour"><span class="opt-emoji">😊</span><span class="opt-label">Приятно, но не особенный</span></button>
         <button class="opt" data-val="1" data-cat="sour"><span class="opt-emoji">😐</span><span class="opt-label">Не обращаю внимания</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="13">
-      <div class="q-section">Ароматы и запахи</div>
-      <div class="q-number">Вопрос 14 из 24</div>
-      <div class="q-text">Запах ванили, корицы, кардамона</div>
-      <div class="q-sub">Тёплые, сладкие специи</div>
+      <div class="q-section">Ароматы</div><div class="q-number">Вопрос 14 из 25</div>
+      <div class="q-text">Запах ванили, корицы — как в кондитерской</div>
+      <div class="q-sub">Тёплый сладкий аромат выпечки со специями</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="sweet"><span class="opt-emoji">🌿</span><span class="opt-label">Обожаю, сразу уютно</span></button>
         <button class="opt" data-val="3" data-cat="sweet"><span class="opt-emoji">😊</span><span class="opt-label">Нравится, особенно в выпечке</span></button>
@@ -301,36 +301,31 @@
         <button class="opt" data-val="0" data-cat="sweet"><span class="opt-emoji">😣</span><span class="opt-label">Слишком приторный запах</span></button>
       </div>
     </div>
-
-    <!-- БЛОК 4: СЦЕНАРИИ -->
     <div class="question-block" data-q="14">
-      <div class="q-section">Сценарии</div>
-      <div class="q-number">Вопрос 15 из 24</div>
-      <div class="q-text">В меню два десерта — что выберешь?</div>
+      <div class="q-section">Сценарии</div><div class="q-number">Вопрос 15 из 25</div>
+      <div class="q-text">Выбираешь десерт — что возьмёшь?</div>
+      <div class="q-sub">Всё одинаково доступно, смотришь в меню</div>
       <div class="options">
         <button class="opt" data-val="sweet_sour" data-cat="combo"><span class="opt-emoji">🍋</span><span class="opt-label">Лимонный тарт с меренгой</span></button>
         <button class="opt" data-val="sweet_only" data-cat="combo"><span class="opt-emoji">🍰</span><span class="opt-label">Классический торт с кремом</span></button>
-        <button class="opt" data-val="bitter_sweet" data-cat="combo"><span class="opt-emoji">🍫</span><span class="opt-label">Шоколадный фондан с горьким шоколадом</span></button>
-        <button class="opt" data-val="salty_sweet" data-cat="combo"><span class="opt-emoji">🧇</span><span class="opt-label">Вафля с солёной карамелью и мороженым</span></button>
+        <button class="opt" data-val="bitter_sweet" data-cat="combo"><span class="opt-emoji">🍫</span><span class="opt-label">Шоколадный фондан</span></button>
+        <button class="opt" data-val="salty_sweet" data-cat="combo"><span class="opt-emoji">🧇</span><span class="opt-label">Вафля с солёной карамелью</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="15">
-      <div class="q-section">Сценарии</div>
-      <div class="q-number">Вопрос 16 из 24</div>
-      <div class="q-text">Ты в азиатском ресторане — что берёшь?</div>
+      <div class="q-section">Сценарии</div><div class="q-number">Вопрос 16 из 25</div>
+      <div class="q-text">В кафе с азиатской едой — что тянет заказать?</div>
+      <div class="q-sub">Суши-бар, китайская, корейская — неважно где именно</div>
       <div class="options">
-        <button class="opt" data-val="5" data-cat="umami"><span class="opt-emoji">🍜</span><span class="opt-label">Насыщенный рамен или фо с бульоном</span></button>
-        <button class="opt" data-val="4" data-cat="sour"><span class="opt-emoji">🥗</span><span class="opt-label">Свежий салат с лаймом и рыбным соусом</span></button>
-        <button class="opt" data-val="3" data-cat="sweet"><span class="opt-emoji">🍱</span><span class="opt-label">Суши или роллы — деликатный вкус</span></button>
-        <button class="opt" data-val="2" data-cat="spicy"><span class="opt-emoji">🌶️</span><span class="opt-label">Острое — том ям или кимчи чиге</span></button>
+        <button class="opt" data-val="5" data-cat="umami"><span class="opt-emoji">🍜</span><span class="opt-label">Суп с наваристым бульоном — рамен, лагман, фо</span></button>
+        <button class="opt" data-val="4" data-cat="sour"><span class="opt-emoji">🥗</span><span class="opt-label">Что-то свежее и лёгкое — салат, роллы с огурцом</span></button>
+        <button class="opt" data-val="3" data-cat="sweet"><span class="opt-emoji">🍱</span><span class="opt-label">Суши или роллы — деликатный вкус риса и рыбы</span></button>
+        <button class="opt" data-val="2" data-cat="spicy"><span class="opt-emoji">🌶️</span><span class="opt-label">Острое блюдо — курица в соусе, жареная лапша с перцем</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="16">
-      <div class="q-section">Сценарии</div>
-      <div class="q-number">Вопрос 17 из 24</div>
-      <div class="q-text">На завтрак что-то одно — что выберешь?</div>
+      <div class="q-section">Сценарии</div><div class="q-number">Вопрос 17 из 25</div>
+      <div class="q-text">На завтрак что-то одно</div>
       <div class="options">
         <button class="opt" data-val="sweet" data-cat="morning"><span class="opt-emoji">🥞</span><span class="opt-label">Блины с мёдом или джемом</span></button>
         <button class="opt" data-val="salty" data-cat="morning"><span class="opt-emoji">🥚</span><span class="opt-label">Яичница с тостом и сыром</span></button>
@@ -338,25 +333,19 @@
         <button class="opt" data-val="umami" data-cat="morning"><span class="opt-emoji">🍳</span><span class="opt-label">Авокадо тост с яйцом пашот</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="17">
-      <div class="q-section">Сценарии</div>
-      <div class="q-number">Вопрос 18 из 24</div>
+      <div class="q-section">Сценарии</div><div class="q-number">Вопрос 18 из 25</div>
       <div class="q-text">Пицца — какая твоя?</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="salty"><span class="opt-emoji">🍕</span><span class="opt-label">Четыре сыра — насыщенная и солёная</span></button>
         <button class="opt" data-val="4" data-cat="umami"><span class="opt-emoji">🥩</span><span class="opt-label">С мясом и грибами — максимум умами</span></button>
         <button class="opt" data-val="3" data-cat="sweet"><span class="opt-emoji">🍍</span><span class="opt-label">С ананасом — сладко-солёный контраст</span></button>
-        <button class="opt" data-val="2" data-cat="bitter"><span class="opt-emoji">🌿</span><span class="opt-label">Маргарита с рукколой — просто и свежо</span></button>
+        <button class="opt" data-val="2" data-cat="bitter"><span class="opt-emoji">🌿</span><span class="opt-label">Маргарита с рукколой</span></button>
       </div>
     </div>
-
-    <!-- БЛОК 5: ЧУВСТВИТЕЛЬНОСТЬ -->
     <div class="question-block" data-q="18">
-      <div class="q-section">Чувствительность</div>
-      <div class="q-number">Вопрос 19 из 24</div>
+      <div class="q-section">Чувствительность</div><div class="q-number">Вопрос 19 из 25</div>
       <div class="q-text">Насколько ты замечаешь нюансы?</div>
-      <div class="q-sub">Разница между двумя сортами шоколада или чая</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="sensitivity"><span class="opt-emoji">🔬</span><span class="opt-label">Замечаю всё, вкусы очень детальные</span></button>
         <button class="opt" data-val="3" data-cat="sensitivity"><span class="opt-emoji">👁️</span><span class="opt-label">Чувствую разницу если сравниваю рядом</span></button>
@@ -364,22 +353,17 @@
         <button class="opt" data-val="1" data-cat="sensitivity"><span class="opt-emoji">😶</span><span class="opt-label">Для меня еда либо вкусная либо нет</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="19">
-      <div class="q-section">Чувствительность</div>
-      <div class="q-number">Вопрос 20 из 24</div>
+      <div class="q-section">Чувствительность</div><div class="q-number">Вопрос 20 из 25</div>
       <div class="q-text">Текстура влияет на восприятие вкуса?</div>
-      <div class="q-sub">Мягкое vs хрустящее</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="sensitivity"><span class="opt-emoji">🥐</span><span class="opt-label">Огромно — хрустящее вкуснее того же мягкого</span></button>
         <button class="opt" data-val="3" data-cat="sensitivity"><span class="opt-emoji">🙂</span><span class="opt-label">Немного влияет, но не критично</span></button>
         <button class="opt" data-val="1" data-cat="sensitivity"><span class="opt-emoji">😶</span><span class="opt-label">Не замечаю, важен только вкус</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="20">
-      <div class="q-section">Чувствительность</div>
-      <div class="q-number">Вопрос 21 из 24</div>
+      <div class="q-section">Чувствительность</div><div class="q-number">Вопрос 21 из 25</div>
       <div class="q-text">Мёд vs сахар — чувствуешь разницу?</div>
       <div class="options">
         <button class="opt" data-val="5" data-cat="sweet"><span class="opt-emoji">🍯</span><span class="opt-label">Да, мёд намного богаче и сложнее</span></button>
@@ -388,12 +372,10 @@
         <button class="opt" data-val="1" data-cat="sweet"><span class="opt-emoji">😶</span><span class="opt-label">Вообще не замечаю разницы</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="21">
-      <div class="q-section">Чувствительность</div>
-      <div class="q-number">Вопрос 22 из 24</div>
-      <div class="q-text">Руккола, грейпфрут, брюссельская капуста</div>
-      <div class="q-sub">Лёгкая горечь в овощах</div>
+      <div class="q-section">Чувствительность</div><div class="q-number">Вопрос 22 из 25</div>
+      <div class="q-text">Как ты относишься к горьковатому вкусу в еде?</div>
+      <div class="q-sub">Руккола, грейпфрут, оливки, горький перец — или просто кофе без сахара</div>
       <div class="options">
         <button class="opt" data-val="4" data-cat="bitter"><span class="opt-emoji">🥗</span><span class="opt-label">Люблю эту горчинку</span></button>
         <button class="opt" data-val="2" data-cat="bitter"><span class="opt-emoji">🫤</span><span class="opt-label">Терплю, не прям нравится</span></button>
@@ -401,10 +383,8 @@
         <button class="opt" data-val="0" data-cat="bitter"><span class="opt-emoji">🙅</span><span class="opt-label">Избегаю, горечь невыносима</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="22">
-      <div class="q-section">Чувствительность</div>
-      <div class="q-number">Вопрос 23 из 24</div>
+      <div class="q-section">Чувствительность</div><div class="q-number">Вопрос 23 из 25</div>
       <div class="q-text">Ты ешь одно любимое блюдо часто — надоедает?</div>
       <div class="options">
         <button class="opt" data-val="0" data-cat="sensitivity"><span class="opt-emoji">♾️</span><span class="opt-label">Никогда, любимое остаётся любимым</span></button>
@@ -412,20 +392,29 @@
         <button class="opt" data-val="5" data-cat="sensitivity"><span class="opt-emoji">🔄</span><span class="opt-label">Быстро надоедает, нужна смена</span></button>
       </div>
     </div>
-
     <div class="question-block" data-q="23">
-      <div class="q-section">Чувствительность</div>
-      <div class="q-number">Вопрос 24 из 24</div>
+      <div class="q-section">Напитки</div><div class="q-number">Вопрос 24 из 25</div>
+      <div class="q-text">Алкоголь — если пьёшь, что предпочитаешь?</div>
+      <div class="q-sub">Вкусовые предпочтения в напитках тоже многое говорят о рецепторах</div>
+      <div class="options">
+        <button class="opt" data-val="5" data-cat="sweet"><span class="opt-emoji">🍹</span><span class="opt-label">Сладкие коктейли, сидр, сладкое вино</span></button>
+        <button class="opt" data-val="4" data-cat="sour"><span class="opt-emoji">🍷</span><span class="opt-label">Сухое вино, шампанское — кисловатое и лёгкое</span></button>
+        <button class="opt" data-val="3" data-cat="bitter"><span class="opt-emoji">🍺</span><span class="opt-label">Пиво — горьковатое, с хмелем</span></button>
+        <button class="opt" data-val="2" data-cat="umami"><span class="opt-emoji">🥃</span><span class="opt-label">Крепкое — виски, коньяк, насыщенный вкус</span></button>
+        <button class="opt" data-val="0" data-cat="sensitivity"><span class="opt-emoji">🚫</span><span class="opt-label">Не пью алкоголь</span></button>
+      </div>
+    </div>
+    <div class="question-block" data-q="24">
+      <div class="q-section">Чувствительность</div><div class="q-number">Вопрос 25 из 25</div>
       <div class="q-text">Что тебя описывает лучше всего?</div>
       <div class="options">
         <button class="opt" data-val="adventurous" data-cat="type"><span class="opt-emoji">🌍</span><span class="opt-label">Пробую всё новое, люблю необычные вкусы</span></button>
         <button class="opt" data-val="selective" data-cat="type"><span class="opt-emoji">🎯</span><span class="opt-label">Чёткие предпочтения, лишнее не нужно</span></button>
-        <button class="opt" data-val="sensory" data-cat="type"><span class="opt-emoji">✨</span><span class="opt-label">Еда — это удовольствие и ритуал</span></button>
+        <button class="opt" data-val="sensory" data-cat="type"><span class="opt-emoji">✨</span><span class="opt-label">Еда — это удовольствие и ритуал для меня</span></button>
         <button class="opt" data-val="practical" data-cat="type"><span class="opt-emoji">⚡</span><span class="opt-label">Ем чтобы было вкусно, не заморачиваюсь</span></button>
       </div>
     </div>
-
-  </div><!-- /quiz -->
+  </div>
 
   <div class="nav-row" id="navRow">
     <button class="btn btn-back" id="btnBack" onclick="goBack()" style="visibility:hidden">← Назад</button>
@@ -442,6 +431,7 @@
     <div class="section-card" id="insightsBlock"></div>
     <div class="section-card" id="tryBlock"></div>
     <div class="superpower" id="superpowerBlock"></div>
+    <div class="menu-section" id="menuBlock"></div>
     <div class="share-section">
       <h3>Сравни с другом</h3>
       <p>Отправь ссылку — друг пройдёт тест и вы увидите разницу в профилях</p>
@@ -465,7 +455,7 @@
 <div class="toast" id="toast">Ссылка скопирована ✓</div>
 
 <script>
-const TOTAL = 24;
+const TOTAL = 25;
 let current = 0;
 let answers = Array(TOTAL).fill(null);
 const blocks = document.querySelectorAll('.question-block');
@@ -485,31 +475,26 @@ function updateProgress() {
   document.getElementById('progress').style.width = (current / TOTAL * 100) + '%';
   document.getElementById('btnBack').style.visibility = current > 0 ? 'visible' : 'hidden';
 }
-
 function goNext() {
   if (current < TOTAL - 1) {
-    blocks[current].classList.remove('active');
-    current++;
+    blocks[current].classList.remove('active'); current++;
     blocks[current].classList.add('active');
     document.getElementById('btnNext').disabled = answers[current] === null;
-    document.getElementById('btnNext').textContent = current === TOTAL - 1 ? 'Результат ✦' : 'Далее →';
+    document.getElementById('btnNext').textContent = current === TOTAL-1 ? 'Результат ✦' : 'Далее →';
     updateProgress();
   } else { showResults(); }
 }
-
 function goBack() {
   if (current > 0) {
-    blocks[current].classList.remove('active');
-    current--;
+    blocks[current].classList.remove('active'); current--;
     blocks[current].classList.add('active');
     document.getElementById('btnNext').disabled = false;
-    document.getElementById('btnNext').textContent = current === TOTAL - 1 ? 'Результат ✦' : 'Далее →';
+    document.getElementById('btnNext').textContent = current === TOTAL-1 ? 'Результат ✦' : 'Далее →';
     updateProgress();
   }
 }
-
 function calcScores() {
-  const tally = { sweet:[], sour:[], salty:[], bitter:[], umami:[], spicy:[], sensitivity:[] };
+  const tally = { sweet:[],sour:[],salty:[],bitter:[],umami:[],spicy:[],sensitivity:[] };
   answers.forEach(a => {
     if (!a) return;
     const v = parseFloat(a.val);
@@ -523,71 +508,50 @@ function calcScores() {
   return s;
 }
 
-// Big recommendation database
+// Photo database using Unsplash source URLs
+const ALL_RECS = [
+  // sweet+sour
+  { icon:'🍋', name:'Лимонный тарт с итальянской меренгой', why:'Яркая кислота лимона + воздушная сладкая меренга', tag:'Французская', photo:'https://images.unsplash.com/photo-1519915028121-7d3463d5b1ff?w=200&q=80', req: fs => fs.sweet>=60 && fs.sour>=50 },
+  { icon:'🥭', name:'Манговый ласси с лаймом', why:'Тропическая сладость + кислота лайма + йогурт', tag:'Индийская', photo:'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=200&q=80', req: fs => fs.sweet>=60 && fs.sour>=50 },
+  { icon:'🍓', name:'Клубничный дакуаз', why:'Воздушный миндальный корж + ягодный мусс с кислинкой', tag:'Французская', photo:'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=200&q=80', req: fs => fs.sweet>=60 && fs.sour>=45 },
+  { icon:'🍡', name:'Юдзу-мочи', why:'Японский рисовый десерт с цитрусом юдзу — нежный, сладко-кислый', tag:'Японская', photo:'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=200&q=80', req: fs => fs.sweet>=55 && fs.sour>=55 },
+  { icon:'🫐', name:'Черничный пирог с рикоттой', why:'Ягодная кислинка + нежный сливочный сыр', tag:'Итальянская', photo:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&q=80', req: fs => fs.sweet>=55 && fs.sour>=45 },
+  // sweet
+  { icon:'🍮', name:'Крем-брюле с ванилью', why:'Хрустящая карамельная корочка + нежный ванильный крем', tag:'Французская', photo:'https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=200&q=80', req: fs => fs.sweet>=70 },
+  { icon:'🍰', name:'Казахский чак-чак с мёдом', why:'Хрустящее тесто с мёдом — насыщенная восточная сладость', tag:'Казахская', photo:'https://images.unsplash.com/photo-1621236378699-8597faf6a176?w=200&q=80', req: fs => fs.sweet>=60 },
+  { icon:'🎂', name:'Пахлава с фисташками', why:'Слоёное тесто, орехи, медовый сироп — восточная классика', tag:'Турецкая', photo:'https://images.unsplash.com/photo-1598110750624-2b3cac688f73?w=200&q=80', req: fs => fs.sweet>=65 },
+  { icon:'🧇', name:'Льежские вафли с жемчужным сахаром', why:'Карамелизированный сахар создаёт хруст и насыщенную сладость', tag:'Бельгийская', photo:'https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=200&q=80', req: fs => fs.sweet>=70 },
+  { icon:'🍩', name:'Тайяки с пастой из красной фасоли', why:'Японские вафли-рыбки — деликатная сладость бобовой пасты', tag:'Японская', photo:'https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=200&q=80', req: fs => fs.sweet>=60 },
+  // umami
+  { icon:'🍜', name:'Тонкоцу рамен', why:'Бульон на свиных костях — квинтэссенция умами, варится 12+ часов', tag:'Японская', photo:'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=200&q=80', req: fs => fs.umami>=55 },
+  { icon:'🧀', name:'Выдержанный пармезан 24 месяца', why:'Кристаллы тирозина усиливают умами до максимума — ешь кусочками', tag:'Итальянская', photo:'https://images.unsplash.com/photo-1452195100486-9cc805987862?w=200&q=80', req: fs => fs.umami>=55 },
+  { icon:'🥘', name:'Мисо-суп с даси и вакаме', why:'Три источника умами в одной тарелке — мисо, даси, водоросли', tag:'Японская', photo:'https://images.unsplash.com/photo-1547592180-85f173990554?w=200&q=80', req: fs => fs.umami>=50 },
+  { icon:'🍝', name:'Болоньезе с долгим тушением', why:'4+ часа тушения раскрывают умами говядины и томатов', tag:'Итальянская', photo:'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=200&q=80', req: fs => fs.umami>=55 },
+  { icon:'🥩', name:'Бешбармак с насыщенным бульоном', why:'Казахский умами — наваристый мясной бульон впитывается в тесто', tag:'Казахская', photo:'https://images.unsplash.com/photo-1621501103258-d0e2a2b01628?w=200&q=80', req: fs => fs.umami>=50 },
+  { icon:'🍤', name:'Том ям с тигровыми креветками', why:'Умами морепродуктов + рыбный соус + лемонграсс', tag:'Тайская', photo:'https://images.unsplash.com/photo-1559314809-0d155014e29e?w=200&q=80', req: fs => fs.umami>=55 && fs.spicy>=20 },
+  // salty-sweet
+  { icon:'🍫', name:'Шоколад с морской солью 60%', why:'Соль усиливает восприятие сладости и горечи одновременно', tag:'Бельгийская', photo:'https://images.unsplash.com/photo-1511381939415-e44015466834?w=200&q=80', req: fs => fs.salty>=45 && fs.sweet>=55 },
+  { icon:'🍉', name:'Арбуз с морской солью и фетой', why:'Турецкий способ — соль подчёркивает сладость арбуза', tag:'Турецкая', photo:'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=200&q=80', req: fs => fs.salty>=45 && fs.sweet>=55 },
+  // sour/fermented
+  { icon:'🥒', name:'Кимчи из пекинской капусты', why:'Ферментация создаёт сложную кислоту с умами и лёгкой остротой', tag:'Корейская', photo:'https://images.unsplash.com/photo-1583224964978-2257b8a3e570?w=200&q=80', req: fs => fs.sour>=60 },
+  { icon:'🥐', name:'Хлеб на закваске с творожным сыром', why:'Живая кислота закваски + нежность крем-чиза — простой гурманский завтрак', tag:'Европейская', photo:'https://images.unsplash.com/photo-1549931319-a545dcf3bc7c?w=200&q=80', req: fs => fs.sour>=55 },
+  { icon:'🧃', name:'Комбуча домашнего брожения', why:'Ферментированный чай — шипучая кислота с разными вкусовыми нотами', tag:'Ферментация', photo:'https://images.unsplash.com/photo-1596803244618-8dea9b5e5b4e?w=200&q=80', req: fs => fs.sour>=60 },
+  // drinks/tea/coffee
+  { icon:'🍵', name:'Матча усутя без сахара', why:'Взбитая матча — горечь с травяными нотами, без молока и сахара', tag:'Японская', photo:'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=200&q=80', req: fs => fs.bitter<=40 && fs.sensitivity>=50 },
+  { icon:'☕', name:'Эфиопский джимма — фильтр-кофе', why:'Натуральная обработка даёт ягодную кислоту без горечи', tag:'Кофе', photo:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&q=80', req: fs => fs.sour>=50 && fs.sensitivity>=50 },
+  { icon:'🫖', name:'Тайваньский молочный улун', why:'Сливочно-цветочный аромат, нулевая горечь', tag:'Чай', photo:'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&q=80', req: fs => fs.bitter<=40 },
+  { icon:'🥤', name:'Розовый лимонад с гибискусом', why:'Яркая ягодная кислота + красивый цвет — освежает без сахарного перебора', tag:'Напитки', photo:'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&q=80', req: fs => fs.sour>=55 && fs.sweet>=50 },
+  // sensitivity
+  { icon:'🥐', name:'Круассан с маслом AOC из Изиньи', why:'Качество масла = аромат. Почувствуй разницу в деталях', tag:'Французская', photo:'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=200&q=80', req: fs => fs.sensitivity>=55 },
+  { icon:'🫖', name:'Слепая дегустация 4 сортов чая', why:'Сенча, дарджилинг, улун, пуэр — найди разницу на вкус и запах', tag:'Дегустация', photo:'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=200&q=80', req: fs => fs.sensitivity>=60 },
+];
+
 function buildTryList(fs) {
-  const all = [
-    // СЛАДКОЕ + КИСЛОЕ
-    { icon:'🍋', name:'Лимонный тарт с итальянской меренгой', why:'Идеальный баланс яркой кислоты и сладкого крема', tag:'Французская', req: () => fs.sweet>=60 && fs.sour>=50 },
-    { icon:'🍓', name:'Клубничный дакуаз', why:'Воздушный миндальный корж, ягодный мусс — сладкое с лёгкой кислинкой', tag:'Французская', req: () => fs.sweet>=60 && fs.sour>=45 },
-    { icon:'🥭', name:'Манговый ласси с лаймом', why:'Тропическая сладость + кислота лайма + йогурт', tag:'Индийская', req: () => fs.sweet>=60 && fs.sour>=50 },
-    { icon:'🧁', name:'Лимонные капкейки с кремом чиз', why:'Сыр даёт лёгкую кислинку, которая балансирует сладость', tag:'Американская', req: () => fs.sweet>=65 && fs.sour>=40 },
-    { icon:'🍡', name:'Юдзу-мочи', why:'Японский десерт с цитрусом юдзу — нежный, сладко-кислый', tag:'Японская', req: () => fs.sweet>=55 && fs.sour>=55 },
-    { icon:'🫐', name:'Черничный пирог с рикоттой', why:'Ягодная кислинка + нежный сливочный сыр', tag:'Итальянская', req: () => fs.sweet>=55 && fs.sour>=45 },
-
-    // СЛАДКОЕ
-    { icon:'🍮', name:'Крем-брюле с ванилью', why:'Хрустящая карамельная корочка, нежный ванильный крем', tag:'Французская', req: () => fs.sweet>=70 },
-    { icon:'🍡', name:'Моти с начинкой из пасты матча', why:'Деликатная японская сладость, непохожая на европейские', tag:'Японская', req: () => fs.sweet>=65 },
-    { icon:'🧇', name:'Льежские вафли с жемчужным сахаром', why:'Карамелизированный сахар создаёт хруст и насыщенную сладость', tag:'Бельгийская', req: () => fs.sweet>=70 },
-    { icon:'🍰', name:'Казахский чак-чак с мёдом', why:'Хрустящее тесто с мёдом — родной вкус в лучшем виде', tag:'Казахская', req: () => fs.sweet>=60 },
-    { icon:'🎂', name:'Бакинская пахлава с фисташками', why:'Слоёное тесто, орехи, медовый сироп — насыщенная восточная сладость', tag:'Азербайджанская', req: () => fs.sweet>=65 },
-    { icon:'🍩', name:'Тайяки с красной фасолью', why:'Японские вафли-рыбки с анко — нежная сладость бобовой пасты', tag:'Японская', req: () => fs.sweet>=60 },
-
-    // УМАМИ
-    { icon:'🍜', name:'Тонкоцу рамен', why:'Бульон на свиных костях — квинтэссенция умами, варится 12+ часов', tag:'Японская', req: () => fs.umami>=55 },
-    { icon:'🧀', name:'Выдержанный пармезан 24 месяца', why:'Кристаллы тирозина усиливают умами до максимума', tag:'Итальянская', req: () => fs.umami>=55 },
-    { icon:'🥘', name:'Мисо-суп с даси и вакаме', why:'Три источника умами в одной тарелке — мисо, даси, морские водоросли', tag:'Японская', req: () => fs.umami>=50 },
-    { icon:'🍝', name:'Болоньезе с долгим тушением', why:'4+ часа тушения раскрывают умами говядины и томатов', tag:'Итальянская', req: () => fs.umami>=55 },
-    { icon:'🥩', name:'Бешбармак с насыщенным бульоном', why:'Казахский умами — наваристый мясной бульон впитывается в тесто', tag:'Казахская', req: () => fs.umami>=50 },
-    { icon:'🍤', name:'Том ям с тигровыми креветками', why:'Тайский суп — умами морепродуктов + рыбный соус + лемонграсс', tag:'Тайская', req: () => fs.umami>=55 && fs.spicy>=20 },
-    { icon:'🧆', name:'Паста с трюфельным маслом', why:'Трюфель — самый концентрированный умами в растительном мире', tag:'Итальянская', req: () => fs.umami>=60 },
-
-    // СОЛЁНО-СЛАДКИЙ КОНТРАСТ
-    { icon:'🍫', name:'Шоколад с морской солью 60%', why:'Соль усиливает восприятие сладости и горечи одновременно', tag:'Бельгийская', req: () => fs.salty>=45 && fs.sweet>=55 },
-    { icon:'🧇', name:'Вафли с солёной карамелью и беконом', why:'Сладко-солёный завтрак — американская классика', tag:'Американская', req: () => fs.salty>=50 && fs.sweet>=55 },
-    { icon:'🍉', name:'Арбуз с морской солью и фетой', why:'Турецкий способ есть арбуз — соль подчёркивает сладость', tag:'Турецкая', req: () => fs.salty>=45 && fs.sweet>=55 },
-    { icon:'🍪', name:'Печенье с чипсами и карамелью', why:'Солёные чипсы внутри сладкого печенья — неожиданный хит', tag:'Американская', req: () => fs.salty>=50 && fs.sweet>=60 },
-
-    // КИСЛОЕ / ФЕРМЕНТИРОВАННОЕ
-    { icon:'🥒', name:'Кимчи из пекинской капусты', why:'Ферментация создаёт сложную кислоту с умами и лёгкой остротой', tag:'Корейская', req: () => fs.sour>=60 && fs.spicy>=20 },
-    { icon:'🥐', name:'Хлеб на закваске с творожным сыром', why:'Живая кислота закваски + нежность крем-чиза', tag:'Европейская', req: () => fs.sour>=55 },
-    { icon:'🧃', name:'Комбуча домашнего брожения', why:'Ферментированный чай — шипучая кислота с разными вкусовыми нотами', tag:'Ферментация', req: () => fs.sour>=60 },
-    { icon:'🫙', name:'Маринованный имбирь с рисовым уксусом', why:'Тонкая кислота уксуса + острота имбиря — палитра из двух нот', tag:'Японская', req: () => fs.sour>=55 },
-
-    // НАПИТКИ
-    { icon:'🍵', name:'Матча в стиле усутя', why:'Чашка взбитой матча без сахара — горечь с травяными нотами', tag:'Японская', req: () => fs.bitter<=40 && fs.sensitivity>=50 },
-    { icon:'☕', name:'Эфиопский джимма — фильтр-кофе', why:'Натуральная обработка даёт ягодную кислоту без горечи', tag:'Кофе', req: () => fs.sour>=50 && fs.sensitivity>=50 },
-    { icon:'🍵', name:'Тайваньский молочный улун', why:'Сливочно-цветочный аромат, нулевая горечь — идеал для не-кофейного человека', tag:'Чай', req: () => fs.bitter<=40 },
-    { icon:'🥤', name:'Розовый лимонад с гибискусом', why:'Яркая ягодная кислота и красивый цвет — освежает без сахарного перебора', tag:'Напитки', req: () => fs.sour>=55 && fs.sweet>=50 },
-
-    // АРОМАТ
-    { icon:'🥐', name:'Круассан с маслом АОС из Изиньи', why:'Качество масла = аромат. Почувствуй разницу в деталях', tag:'Французская', req: () => fs.sensitivity>=55 },
-    { icon:'🫖', name:'Слепая дегустация 4 сортов чая', why:'Сенча, дарджилинг, улун, пуэр — найди разницу на вкус и запах', tag:'Дегустация', req: () => fs.sensitivity>=60 },
-  ];
-
-  const matched = all.filter(item => item.req());
-
-  // Группируем по тегу
-  const groups = {};
-  matched.forEach(item => {
-    if (!groups[item.tag]) groups[item.tag] = [];
-    groups[item.tag].push(item);
-  });
-
-  // Берём до 8 штук, разнообразно
+  const matched = ALL_RECS.filter(r => r.req(fs));
   const result = [];
   const usedTags = new Set();
-  matched.sort(() => Math.random() - 0.5);
-  for (const item of matched) {
+  const shuffled = matched.sort(() => Math.random() - 0.5);
+  for (const item of shuffled) {
     if (result.length >= 8) break;
     if (!usedTags.has(item.tag) || result.length < 4) {
       result.push(item);
@@ -597,124 +561,119 @@ function buildTryList(fs) {
   return result.slice(0, 8);
 }
 
+function makeTryItem(t) {
+  const div = document.createElement('div');
+  div.className = 'try-item';
+  div.innerHTML = `
+    <div class="try-photo">
+      <img src="${t.photo}" alt="${t.name}" class="loading" onload="this.classList.remove('loading')" onerror="this.parentElement.style.background='var(--border)'">
+    </div>
+    <div class="try-body">
+      <div class="try-item-name">${t.name}</div>
+      <div class="try-item-why">${t.why}</div>
+      <span class="try-item-tag">${t.tag}</span>
+    </div>`;
+  return div;
+}
+
 function showResults() {
   const fs = calcScores();
-
   let title, type, desc, typeColor;
-  if (fs.sweet >= 70 && fs.sour >= 55) {
+  if (fs.sweet>=70 && fs.sour>=55) {
     title='Кисло-сладкий мечтатель'; type='Фруктово-яркий профиль'; typeColor='rgba(232,160,200,0.2)';
     desc='Ты тянешься к ярким, живым вкусам. Сладкое и кислое вместе — твой пик удовольствия. Такой профиль отлично подходит для дегустации фруктов, ягодных десертов и вин.';
-  } else if (fs.sweet >= 70 && fs.umami >= 55) {
+  } else if (fs.sweet>=70 && fs.umami>=55) {
     title='Умами-сладкий гурман'; type='Глубокий вкусовой профиль'; typeColor='rgba(240,192,128,0.2)';
     desc='Ты ценишь и яркие сладкие ноты, и глубину вкуса. Профиль гурмана — умеешь различать сложные блюда и наслаждаться многоуровневым вкусом.';
-  } else if (fs.bitter >= 60) {
+  } else if (fs.bitter>=60) {
     title='Горький ценитель'; type='Терпкий профиль'; typeColor='rgba(136,120,160,0.2)';
-    desc='Высокая толерантность к горечи — редкость. Ты можешь наслаждаться тем, что другие отвергают: хороший эспрессо, тёмный шоколад, оливки, раdicchio.';
-  } else if (fs.umami >= 65) {
+    desc='Высокая толерантность к горечи — редкость. Ты наслаждаешься тем, что другие отвергают: хороший эспрессо, тёмный шоколад, оливки.';
+  } else if (fs.umami>=65) {
     title='Умами-охотник'; type='Насыщенный профиль'; typeColor='rgba(240,192,128,0.2)';
-    desc='Глубина вкуса важнее яркости. Ты чувствуешь умами там, где другие просто говорят «вкусно». Японская кухня, выдержанные сыры — твоя стихия.';
-  } else if (fs.sour >= 65) {
+    desc='Глубина вкуса важнее яркости. Ты чувствуешь умами там, где другие просто говорят «вкусно». Японская кухня и выдержанные сыры — твоя стихия.';
+  } else if (fs.sour>=65) {
     title='Кислотный сенсор'; type='Острокислый профиль'; typeColor='rgba(168,216,176,0.2)';
     desc='Ты особенно чувствительна к кислому — редкое качество. Хорошо развитый кислотный вкус открывает мир ферментированных продуктов и специальтикофе.';
   } else {
     title='Сладкий гедонист'; type='Сладко-солёный профиль'; typeColor='rgba(144,200,232,0.2)';
     desc='Сладкое — твоя главная стихия. Умеренное восприятие горького и острого говорит о высокой чувствительности рецепторов. Такой профиль часто встречается у supertasters.';
   }
-
   document.getElementById('resTitle').textContent = title;
   const te = document.getElementById('resType');
-  te.textContent = type;
-  te.style.background = typeColor;
-  te.style.border = '1px solid rgba(232,160,200,0.3)';
-  te.style.color = '#e8a0c8';
+  te.textContent = type; te.style.background = typeColor;
+  te.style.border = '1px solid rgba(232,160,200,0.3)'; te.style.color = '#e8a0c8';
   document.getElementById('resDesc').textContent = desc;
 
-  // Bars
   const barsData = [
-    {name:'Сладкий',key:'sweet',color:'#e8a0c8'},
-    {name:'Кислый',key:'sour',color:'#a8d8b0'},
-    {name:'Солёный',key:'salty',color:'#90c8e8'},
-    {name:'Горький',key:'bitter',color:'#8878a0'},
-    {name:'Умами',key:'umami',color:'#f0c080'},
-    {name:'Острый',key:'spicy',color:'#e89080'},
+    {name:'Сладкий',key:'sweet',color:'#e8a0c8'},{name:'Кислый',key:'sour',color:'#a8d8b0'},
+    {name:'Солёный',key:'salty',color:'#90c8e8'},{name:'Горький',key:'bitter',color:'#8878a0'},
+    {name:'Умами',key:'umami',color:'#f0c080'},{name:'Острый',key:'spicy',color:'#e89080'},
   ];
-  const bc = document.getElementById('tasteBars');
-  bc.innerHTML = '';
+  const bc = document.getElementById('tasteBars'); bc.innerHTML = '';
   barsData.forEach(b => {
-    const row = document.createElement('div');
-    row.className = 'taste-row';
+    const row = document.createElement('div'); row.className = 'taste-row';
     row.innerHTML = `<div class="taste-name">${b.name}</div>
       <div class="bar-track"><div class="bar-fill" style="background:${b.color}" data-pct="${fs[b.key]}"></div></div>
       <div class="bar-pct">${fs[b.key]}%</div>`;
     bc.appendChild(row);
   });
-  setTimeout(() => document.querySelectorAll('.bar-fill').forEach(el => el.style.width = el.dataset.pct+'%'), 100);
+  setTimeout(() => document.querySelectorAll('.bar-fill').forEach(el => el.style.width=el.dataset.pct+'%'), 100);
 
-  // Insights
   const insights = [];
-  if (fs.sweet>=70&&fs.bitter<=30) insights.push({icon:'🧬',text:'Возможно, ты supertaster — люди с повышенным количеством вкусовых сосочков. Острее воспринимаешь сладкое и сильнее отвергаешь горькое.'});
-  if (fs.sour>=60) insights.push({icon:'🍋',text:'Высокая чувствительность к кислому — редкое качество. Твои рецепторы хорошо распознают pH пищи, что полезно при дегустации вин.'});
-  if (fs.spicy<=20) insights.push({icon:'🌡️',text:'Острота воспринимается через TRPV1 рецепторы — болевая реакция. Низкая толерантность часто коррелирует с высокой чувствительностью вкусовых рецепторов.'});
+  if (fs.sweet>=70&&fs.bitter<=30) insights.push({icon:'🧬',text:'Возможно, ты supertaster — людей с повышенным числом вкусовых сосочков. Острее воспринимаешь сладкое и сильнее отвергаешь горькое.'});
+  if (fs.sour>=60) insights.push({icon:'🍋',text:'Высокая чувствительность к кислому — редкое качество. Твои рецепторы хорошо распознают pH пищи, что ценно при дегустации вин.'});
+  if (fs.spicy<=20) insights.push({icon:'🌡️',text:'Острота воспринимается через TRPV1 рецепторы как болевая реакция. Низкая толерантность часто коррелирует с высокой чувствительностью вкусовых рецепторов.'});
   if (fs.umami>=60) insights.push({icon:'🎯',text:'Хорошее восприятие умами означает, что ты различаешь глутаматы. Пармезан, мисо и рыбный соус будут особенно яркими.'});
-  if (fs.sensitivity>=65) insights.push({icon:'✨',text:'Ты замечаешь нюансы вкуса и реагируешь на запахи — это база для дегустации. Кофейная, чайная или шоколадная дегустация — твой потенциал.'});
+  if (fs.sensitivity>=65) insights.push({icon:'✨',text:'Ты замечаешь нюансы вкуса и реагируешь на ароматы — это база для серьёзной дегустации.'});
   if (!insights.length) insights.push({icon:'🍽️',text:'Сбалансированный вкусовой профиль — ты хорошо воспринимаешь разные вкусы без экстремальных реакций.'});
   document.getElementById('insightsBlock').innerHTML = '<h3>Что это значит</h3>' +
     insights.map(i=>`<div class="insight-item"><span class="insight-icon">${i.icon}</span><span>${i.text}</span></div>`).join('');
 
-  // Try this — rich version
+  // Try this with photos
   const tryItems = buildTryList(fs);
-  let tryHTML = '<h3>🍽️ Что тебе стоит попробовать</h3>';
-  tryHTML += '<div class="try-grid">' + tryItems.map(t =>
-    `<div class="try-item">
-      <span class="try-item-icon">${t.icon}</span>
-      <div>
-        <div class="try-item-name">${t.name}</div>
-        <div class="try-item-why">${t.why}</div>
-        <span class="try-item-tag">${t.tag}</span>
-      </div>
-    </div>`
-  ).join('') + '</div>';
-  document.getElementById('tryBlock').innerHTML = tryHTML;
+  const tryBlock = document.getElementById('tryBlock');
+  tryBlock.innerHTML = '<h3>🍽️ Что тебе стоит попробовать</h3>';
+  const grid = document.createElement('div'); grid.className = 'try-grid';
+  tryItems.forEach(t => grid.appendChild(makeTryItem(t)));
+  tryBlock.appendChild(grid);
 
-  // Superpower
   const sorted = [...barsData].sort((a,b)=>fs[b.key]-fs[a.key]);
   const sp = {sweet:'Ты идеальный дегустатор десертов и кондитерских изделий',sour:'Дегустация вин, ферментированных продуктов и цитрусовых — твоя стихия',salty:'Сырная и мясная дегустация будет особенно яркой',umami:'Дегустация бульонов, выдержанных сыров и японской кухни',bitter:'Кофейная и чайная дегустация — твой потенциал',spicy:'Работа с перцами и специями'};
   document.getElementById('superpowerBlock').innerHTML = `<div class="label">Твоя суперспособность</div><div class="value">${sp[sorted[0].key]||'Развитый вкус'}</div>`;
 
-  // Share
+  window._lastFs = fs;
+  renderWeekMenu(fs);
+
   const encoded = btoa(['sweet','sour','salty','bitter','umami','spicy','sensitivity'].map(k=>fs[k]).join(','));
-  const shareUrl = window.location.href.split('?')[0] + '?friend=' + encoded;
+  const shareUrl = window.location.href.split('?')[0]+'?friend='+encoded;
   document.getElementById('shareUrl').textContent = shareUrl;
 
-  // Friend compare
   const fp = new URLSearchParams(window.location.search).get('friend');
   if (fp) {
     try {
-      const keys = ['sweet','sour','salty','bitter','umami','spicy','sensitivity'];
-      const friendScores = {};
-      atob(fp).split(',').map(Number).forEach((v,i) => friendScores[keys[i]]=v);
-      document.getElementById('compareView').style.display = 'block';
-      const cb = document.getElementById('compareBars');
-      cb.innerHTML = '';
-      barsData.forEach(b => {
-        const row = document.createElement('div');
-        row.className = 'compare-row';
-        row.innerHTML = `<div class="compare-name">${b.name}</div>
+      const keys=['sweet','sour','salty','bitter','umami','spicy','sensitivity'];
+      const friendScores={};
+      atob(fp).split(',').map(Number).forEach((v,i)=>friendScores[keys[i]]=v);
+      document.getElementById('compareView').style.display='block';
+      const cb=document.getElementById('compareBars'); cb.innerHTML='';
+      barsData.forEach(b=>{
+        const row=document.createElement('div'); row.className='compare-row';
+        row.innerHTML=`<div class="compare-name">${b.name}</div>
           <div class="compare-track">
             <div class="compare-fill-friend" style="background:var(--accent4)" data-pct="${friendScores[b.key]}"></div>
             <div class="compare-fill-me" style="background:${b.color}" data-pct="${fs[b.key]}"></div>
           </div>`;
         cb.appendChild(row);
       });
-      setTimeout(() => {
-        document.querySelectorAll('.compare-fill-me').forEach(el => el.style.width=el.dataset.pct+'%');
-        document.querySelectorAll('.compare-fill-friend').forEach(el => el.style.width=el.dataset.pct+'%');
-      }, 300);
-      const diffs = barsData.map(b=>({name:b.name,diff:fs[b.key]-friendScores[b.key]})).filter(d=>Math.abs(d.diff)>=20).sort((a,b)=>Math.abs(b.diff)-Math.abs(a.diff));
-      document.getElementById('compareDiff').textContent = diffs.length
-        ? `Главное различие: ${diffs[0].name.toLowerCase()} ты ${diffs[0].diff>0?'чувствуешь сильнее':'чувствуешь слабее'}, чем друг — разница ${Math.abs(diffs[0].diff)}%`
-        : 'Вы очень похожи по вкусовому профилю — редкое совпадение!';
-    } catch(e) {}
+      setTimeout(()=>{
+        document.querySelectorAll('.compare-fill-me').forEach(el=>el.style.width=el.dataset.pct+'%');
+        document.querySelectorAll('.compare-fill-friend').forEach(el=>el.style.width=el.dataset.pct+'%');
+      },300);
+      const diffs=barsData.map(b=>({name:b.name,diff:fs[b.key]-friendScores[b.key]})).filter(d=>Math.abs(d.diff)>=20).sort((a,b)=>Math.abs(b.diff)-Math.abs(a.diff));
+      document.getElementById('compareDiff').textContent=diffs.length
+        ?`Главное различие: ${diffs[0].name.toLowerCase()} ты ${diffs[0].diff>0?'чувствуешь сильнее':'чувствуешь слабее'}, чем друг — разница ${Math.abs(diffs[0].diff)}%`
+        :'Вы очень похожи по вкусовому профилю — редкое совпадение!';
+    } catch(e){}
   }
 
   document.getElementById('quiz').style.display='none';
@@ -724,8 +683,8 @@ function showResults() {
 }
 
 function copyLink() {
-  navigator.clipboard.writeText(document.getElementById('shareUrl').textContent).then(() => {
-    const btn = document.getElementById('btnCopy');
+  navigator.clipboard.writeText(document.getElementById('shareUrl').textContent).then(()=>{
+    const btn=document.getElementById('btnCopy');
     btn.textContent='Скопировано ✓'; btn.classList.add('copied');
     setTimeout(()=>{btn.textContent='Копировать';btn.classList.remove('copied');},2500);
     const t=document.getElementById('toast'); t.classList.add('show');
@@ -752,6 +711,209 @@ window.addEventListener('load',()=>{
   if(new URLSearchParams(window.location.search).get('friend'))
     document.getElementById('headerSub').textContent='Друг поделился профилем — пройди тест и сравните результаты';
 });
+
+// ---- MENU DATABASE ----
+const MENU_DB = {
+  breakfast: [
+    { name:'Тосты с мёдом и бананом', why:'Сладкое + мягкая текстура — лёгкий старт дня', icon:'🍞', photo:'https://images.unsplash.com/photo-1484723091739-30990dd1e931?w=200&q=80', tags:['easy'], fit: fs=>fs.sweet>=55,
+      ing:'Хлеб — 2 ломтика, мёд — 1 ст.л., банан — 1 шт., сливочное масло',
+      steps:['Поджарь хлеб в тостере','Намажь тонким слоем масла','Нарежь банан кружочками, разложи сверху','Полей мёдом'] },
+    { name:'Блины с джемом', why:'Классика — мягкие, сладкие, быстрые', icon:'🥞', photo:'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=200&q=80', tags:['easy'], fit: fs=>fs.sweet>=55,
+      ing:'Мука — 1 стакан, молоко — 1.5 стакана, яйцо — 2 шт., сахар — 1 ст.л., соль, масло',
+      steps:['Смешай яйца, молоко, муку, сахар и соль до однородности','Дай тесту постоять 10 минут','Жарь на смазанной сковороде по 1–2 мин с каждой стороны','Подавай с джемом или сметаной'] },
+    { name:'Овсянка с ягодами и мёдом', why:'Сладко-кислый баланс ягод + тёплая каша', icon:'🥣', photo:'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=200&q=80', tags:['easy'], fit: fs=>fs.sweet>=50,
+      ing:'Овсяные хлопья — 5 ст.л., молоко — 200мл, ягоды — горсть, мёд — 1 ч.л.',
+      steps:['Залей хлопья молоком','Вари 5 минут на среднем огне, помешивая','Перелей в тарелку','Добавь ягоды и полей мёдом'] },
+    { name:'Яичница с тостом и сыром', why:'Солёный насыщенный завтрак — сытно и быстро', icon:'🍳', photo:'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=200&q=80', tags:['easy'], fit: fs=>fs.salty>=45||fs.umami>=45,
+      ing:'Яйца — 2 шт., хлеб — 1 ломтик, сыр — 30г, масло, соль, перец',
+      steps:['Поджарь хлеб','Разогрей сковороду с маслом','Разбей яйца, посоли, жарь 2–3 минуты','Натри сыр сверху — он подтает','Подавай с тостом'] },
+    { name:'Авокадо тост с яйцом пашот', why:'Умами авокадо + нежное яйцо — сытно без тяжести', icon:'🥑', photo:'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=200&q=80', tags:['new'], fit: fs=>fs.umami>=45,
+      ing:'Хлеб — 1 ломтик, авокадо — 1/2, яйцо — 1 шт., лимонный сок, соль, уксус',
+      steps:['Поджарь хлеб','Разомни авокадо с солью и каплей лимона','Намажь на тост','В кипящую воду с ложкой уксуса опусти яйцо, вари 3 минуты','Выложи яйцо на авокадо'] },
+    { name:'Йогурт с гранолой и фруктами', why:'Кислый йогурт + хруст + сладость фруктов', icon:'🍓', photo:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&q=80', tags:['easy'], fit: fs=>fs.sour>=45,
+      ing:'Йогурт натуральный — 150г, гранола — 3 ст.л., фрукты или ягоды — горсть',
+      steps:['Налей йогурт в тарелку','Насыпь гранолу','Нарежь фрукты, разложи сверху','Добавь мёд по желанию'] },
+    { name:'Сырники со сметаной', why:'Нежный творог + лёгкая кислинка сметаны', icon:'🫓', photo:'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=200&q=80', tags:['easy'], fit: fs=>fs.sweet>=50||fs.sour>=45,
+      ing:'Творог — 300г, яйцо — 1 шт., мука — 3 ст.л., сахар — 2 ст.л., ванилин, масло',
+      steps:['Смешай творог, яйцо, сахар, ванилин и муку','Сформируй небольшие лепёшки, обваляй в муке','Жарь на среднем огне 3–4 минуты с каждой стороны','Подавай со сметаной или вареньем'] },
+  ],
+  lunch: [
+    { name:'Куриный суп с лапшой', why:'Наваристый бульон — классика без лишних сложностей', icon:'🍲', photo:'https://images.unsplash.com/photo-1547592180-85f173990554?w=200&q=80', tags:['easy'], fit: fs=>true,
+      ing:'Куриное филе — 300г, морковь — 1 шт., лук — 1 шт., лапша — 100г, соль, лавровый лист',
+      steps:['Залей курицу 1.5л воды, доведи до кипения, убери пену','Добавь морковь, лук, лавровый лист, соль','Вари 30 минут на тихом огне','Вынь и нарежь курицу','Добавь лапшу, вари 7 минут, верни курицу'] },
+    { name:'Паста с томатным соусом', why:'Умами томатов + солёность сыра — быстро и вкусно', icon:'🍝', photo:'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=200&q=80', tags:['easy'], fit: fs=>true,
+      ing:'Паста — 150г, томатная паста — 2 ст.л., чеснок — 2 зубчика, масло, соль, сыр',
+      steps:['Отвари пасту','Обжарь чеснок на масле 1 минуту','Добавь томатную пасту, 100мл воды, соль — туши 5 минут','Смешай с пастой','Посыпь сыром'] },
+    { name:'Борщ со сметаной', why:'Кислинка свёклы + насыщенный бульон — сытный классик', icon:'🥣', photo:'https://images.unsplash.com/photo-1547592180-85f173990554?w=200&q=80', tags:['easy'], fit: fs=>true,
+      ing:'Свёкла — 1 шт., капуста — 200г, картофель — 2 шт., морковь — 1 шт., бульон, томатная паста, чеснок',
+      steps:['Отвари картофель в бульоне 15 минут','Натри свёклу, обжарь с морковью и томатной пастой 7 минут','Добавь в суп с капустой','Вари ещё 10 минут','Добавь чеснок, подавай со сметаной'] },
+    { name:'Жареный рис с яйцом и соевым соусом', why:'Соевый соус превращает простой рис в блюдо', icon:'🍚', photo:'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=200&q=80', tags:['easy','new'], fit: fs=>fs.umami>=45,
+      ing:'Варёный рис — 200г, яйца — 2 шт., соевый соус — 2 ст.л., чеснок — 1 зубчик, масло',
+      steps:['Разогрей масло на сильном огне','Обжарь чеснок 30 секунд','Добавь рис, жарь 3 минуты','Сдвинь рис, разбей яйца, помешай','Смешай всё, добавь соевый соус'] },
+    { name:'Лагман из говядины', why:'Казахская классика — наваристый суп-лапша', icon:'🍜', photo:'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=200&q=80', tags:['easy'], fit: fs=>true,
+      ing:'Говядина — 400г, лук, морковь, болгарский перец, томатная паста, лапша, специи',
+      steps:['Обжарь нарезанное мясо до корочки','Добавь лук и морковь, жарь 5 минут','Добавь перец, томатную пасту, залей водой 1л','Туши 40 минут','Отвари лапшу отдельно, подавай вместе'] },
+    { name:'Греческий салат с лавашом', why:'Солёная фета + кислота томатов + хрустящий хлеб', icon:'🥗', photo:'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=200&q=80', tags:['easy'], fit: fs=>fs.salty>=40||fs.sour>=40,
+      ing:'Помидоры — 2 шт., огурец — 1 шт., фета — 100г, оливки, масло, орегано, лаваш',
+      steps:['Нарежь помидоры и огурец крупно','Покроши фету','Смешай, добавь оливки, полей маслом, посыпь орегано','Поджарь лаваш до хруста, подавай рядом'] },
+    { name:'Тыквенный крем-суп', why:'Сладковатая тыква + сливки — нежно и согревает', icon:'🎃', photo:'https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=200&q=80', tags:['new'], fit: fs=>fs.sweet>=45,
+      ing:'Тыква — 500г, лук — 1 шт., чеснок — 2 зубчика, сливки — 100мл, бульон — 500мл, соль, мускатный орех',
+      steps:['Обжарь лук и чеснок 3 минуты','Добавь нарезанную тыкву, залей бульоном','Вари 20 минут до мягкости','Пробей блендером до однородности','Добавь сливки, соль и щепотку мускатного ореха'] },
+  ],
+  snack: [
+    { name:'Яблоко с арахисовой пастой', why:'Кислое яблоко + ореховая паста — неожиданно хорошо', icon:'🍎', photo:'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=200&q=80', tags:['easy'], fit: fs=>true,
+      ing:'Яблоко — 1 шт., арахисовая паста — 2 ст.л.',
+      steps:['Нарежь яблоко дольками','Обмакивай в арахисовую пасту — всё'] },
+    { name:'Тост с творожным сыром и огурцом', why:'Свежий и лёгкий — соль сыра + хруст', icon:'🥒', photo:'https://images.unsplash.com/photo-1484723091739-30990dd1e931?w=200&q=80', tags:['easy'], fit: fs=>true,
+      ing:'Хлеб — 1 ломтик, творожный сыр (Almette) — 2 ст.л., огурец — несколько ломтиков, соль',
+      steps:['Поджарь хлеб','Намажь сыр','Нарежь огурец тонко, выложи сверху, чуть посоли'] },
+    { name:'Банан с тёмным шоколадом', why:'Простой контраст сладкого и горького', icon:'🍌', photo:'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=200&q=80', tags:['easy'], fit: fs=>fs.sweet>=50,
+      ing:'Банан — 1 шт., тёмный шоколад — 2–3 дольки',
+      steps:['Нарежь банан','Растопи шоколад в микроволновке 30 секунд','Полей банан или обмакни'] },
+    { name:'Домашние чипсы из лаваша', why:'Хрустящие и солёные — вкуснее магазинных', icon:'🫓', photo:'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=200&q=80', tags:['easy'], fit: fs=>fs.salty>=45,
+      ing:'Лаваш — 1 лист, масло, соль, паприка',
+      steps:['Нарежь лаваш треугольниками','Смажь маслом с двух сторон','Посыпь солью и паприкой','Запекай 180° 8–10 минут до хруста'] },
+    { name:'Йогурт с мёдом и орехами', why:'Кислый йогурт + сладкий мёд — быстрый баланс', icon:'🍯', photo:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&q=80', tags:['easy'], fit: fs=>true,
+      ing:'Йогурт греческий — 150г, мёд — 1 ч.л., орехи — горсть',
+      steps:['Налей йогурт','Полей мёдом','Покроши орехи сверху'] },
+    { name:'Творог с вареньем', why:'Кислинка творога + сладкое варенье — просто и вкусно', icon:'🧁', photo:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&q=80', tags:['easy'], fit: fs=>fs.sour>=40||fs.sweet>=50,
+      ing:'Творог — 150г, варенье или джем — 1–2 ст.л.',
+      steps:['Выложи творог в тарелку','Добавь варенье сверху','Перемешивать не надо — ешь слоями'] },
+    { name:'Яйцо вкрутую с солью и хлебом', why:'Простой белковый перекус — умами желтка + соль', icon:'🥚', photo:'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=200&q=80', tags:['easy'], fit: fs=>fs.umami>=40||fs.salty>=40,
+      ing:'Яйцо — 2 шт., хлеб — 1 ломтик, соль',
+      steps:['Залей яйца холодной водой, вари 8–9 минут после закипания','Остуди под холодной водой, очисти','Подавай с хлебом и солью'] },
+  ],
+  dinner: [
+    { name:'Курица с картошкой в духовке', why:'Умами мяса + хрустящая картошка — без лишних движений', icon:'🍗', photo:'https://images.unsplash.com/photo-1518492104633-130d0cc84637?w=200&q=80', tags:['easy'], fit: fs=>true,
+      ing:'Куриные бёдра — 4 шт., картофель — 4 шт., чеснок, масло, соль, паприка',
+      steps:['Нарежь картошку дольками, смешай с маслом и специями','Выложи на противень','Натри курицу солью и паприкой, выложи рядом','Запекай 200° 40–45 минут'] },
+    { name:'Паста карбонара', why:'Сливочно-солёный вкус с умами бекона', icon:'🍝', photo:'https://images.unsplash.com/photo-1612874742237-6526221588e3?w=200&q=80', tags:['new'], fit: fs=>fs.salty>=45||fs.umami>=50,
+      ing:'Спагетти — 150г, бекон — 100г, яйца — 2 шт.+1 желток, пармезан — 50г, чёрный перец',
+      steps:['Отвари пасту, сохрани 100мл воды от варки','Обжарь бекон до хруста','Смешай яйца с пармезаном и перцем','Слей пасту, добавь к бекону, сними с огня','Добавь яичную смесь, быстро перемешай, разбавь водой до кремовости'] },
+    { name:'Лосось с лимоном в фольге', why:'Умами рыбы + кислота лимона — легко и полезно', icon:'🐟', photo:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&q=80', tags:['new'], fit: fs=>fs.umami>=45||fs.sour>=40,
+      ing:'Филе лосося — 2 куска, лимон — 1 шт., чеснок — 2 зубчика, масло, соль, укроп',
+      steps:['Выложи лосось на фольгу','Посоли, добавь чеснок и кружки лимона сверху','Полей маслом, посыпь укропом','Заверни в фольгу','Запекай 180° 20 минут'] },
+    { name:'Тако с говяжьим фаршем', why:'Солёный фарш + кислая сальса + свежесть', icon:'🌮', photo:'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=200&q=80', tags:['new'], fit: fs=>fs.salty>=40,
+      ing:'Фарш говяжий — 300г, тортилья — 4 шт., помидор, лук, лайм, зира, паприка',
+      steps:['Обжарь фарш 7 минут, разбивая комки','Добавь специи и соль, туши 3 минуты','Нарежь помидор и лук, сбрызни лаймом','Подогрей тортильи 30 сек','Наполни фаршем, добавь помидор-лук'] },
+    { name:'Рис с овощами и соевым соусом', why:'Простой и сытный — соевый соус делает всё', icon:'🍚', photo:'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=200&q=80', tags:['easy'], fit: fs=>true,
+      ing:'Рис — 200г, морковь, болгарский перец, лук, соевый соус — 3 ст.л., масло',
+      steps:['Отвари рис','Нарежь овощи кубиками, обжарь 5–7 минут','Добавь рис к овощам','Влей соевый соус, перемешай, жарь 2 минуты'] },
+    { name:'Суп с чечевицей и томатами', why:'Насыщенный вкус без мяса — быстро и сытно', icon:'🫘', photo:'https://images.unsplash.com/photo-1547592180-85f173990554?w=200&q=80', tags:['easy','new'], fit: fs=>true,
+      ing:'Красная чечевица — 150г, консервированные томаты — 1 банка, лук, чеснок, зира, паприка, соль',
+      steps:['Обжарь лук и чеснок 3 минуты','Добавь специи, жарь 1 минуту','Добавь чечевицу и томаты, залей водой 700мл','Вари 20 минут','По желанию пробей блендером частично'] },
+    { name:'Котлеты с гречкой', why:'Сочное мясо + гречка — сытный домашний ужин', icon:'🍖', photo:'https://images.unsplash.com/photo-1529042410759-befb1204b468?w=200&q=80', tags:['easy'], fit: fs=>fs.umami>=45||fs.salty>=40,
+      ing:'Фарш смешанный — 400г, лук — 1 шт., яйцо — 1 шт., хлеб — 1 ломтик, соль, перец, гречка — 150г',
+      steps:['Замочи хлеб в воде, отожми','Смешай фарш, тёртый лук, яйцо, хлеб, соль и перец','Сформируй котлеты','Обжарь на среднем огне по 5 минут с каждой стороны','Отвари гречку по инструкции'] },
+  ]
+};
+
+function pickUnique(pool, used) {
+  const available = pool.filter((_,i)=>!used.has(i));
+  const source = available.length ? available : pool;
+  const item = source[Math.floor(Math.random()*source.length)];
+  const idx = pool.indexOf(item);
+  used.add(idx);
+  return item;
+}
+
+function buildWeekMenu(fs) {
+  const slots = ['breakfast','lunch','snack','dinner'];
+  const usedPerSlot = { breakfast:new Set(), lunch:new Set(), snack:new Set(), dinner:new Set() };
+  const week = [];
+  for (let d=0; d<7; d++) {
+    const day = {};
+    slots.forEach(slot => {
+      const pool = MENU_DB[slot].filter(m=>m.fit(fs));
+      const fallback = MENU_DB[slot];
+      const list = pool.length >= 2 ? pool : fallback;
+      day[slot] = pickUnique(list, usedPerSlot[slot]);
+    });
+    week.push(day);
+  }
+  return week;
+}
+
+let currentWeekMenu = null;
+let currentDay = 0;
+
+function renderWeekMenu(fs) {
+  currentWeekMenu = buildWeekMenu(fs);
+  currentDay = 0;
+  renderDayMenu(fs);
+}
+
+function renderDayMenu(fs) {
+  const dayNames = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'];
+  const slots = ['breakfast','lunch','snack','dinner'];
+  const labels = { breakfast:'☀️ Завтрак', lunch:'🌿 Обед', snack:'🍎 Перекус', dinner:'🌙 Ужин' };
+  const block = document.getElementById('menuBlock');
+  block.innerHTML = `
+    <h3>🗓 Твоё меню на неделю</h3>
+    <p class="menu-subtitle">Подобрано под твой вкусовой профиль — от простого до интересного</p>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;" id="dayTabs"></div>
+    <div id="dayContent"></div>
+    <button onclick="currentWeekMenu=null;renderWeekMenu(window._lastFs)" style="display:block;margin:16px auto 0;background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 20px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.82rem;cursor:pointer;">🔄 Новое меню</button>
+  `;
+
+  // Day tabs
+  const tabsEl = document.getElementById('dayTabs');
+  dayNames.forEach((name,i) => {
+    const btn = document.createElement('button');
+    btn.textContent = name.slice(0,2);
+    btn.title = name;
+    btn.style.cssText = `padding:6px 12px;border-radius:100px;border:1px solid ${i===currentDay?'var(--accent1)':'var(--border)'};background:${i===currentDay?'rgba(232,160,200,0.15)':'transparent'};color:${i===currentDay?'var(--accent1)':'var(--muted)'};font-size:0.8rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;`;
+    btn.onclick = () => { currentDay=i; renderDayMenu(fs); };
+    tabsEl.appendChild(btn);
+  });
+
+  // Day content
+  const content = document.getElementById('dayContent');
+  const dayData = currentWeekMenu[currentDay];
+  slots.forEach(slot => {
+    const m = dayData[slot];
+    const recipeId = `recipe-${slot}-${currentDay}`;
+    const tagsHTML = (m.tags||[]).map(t=>`<span class="meal-tag ${t}">${t==='easy'?'Просто':t==='new'?'Попробуй':'🌶️'}</span>`).join('');
+    const mealBlock = document.createElement('div');
+    mealBlock.className = 'meal-block';
+    mealBlock.innerHTML = `
+      <div class="meal-time">${labels[slot]}</div>
+      <div class="meal-card">
+        <div class="meal-header">
+          <div class="meal-photo">
+            <img src="${m.photo}" alt="${m.name}" class="loading" onload="this.classList.remove('loading')" onerror="this.parentElement.style.background='var(--border)'">
+          </div>
+          <div class="meal-info">
+            <div class="meal-name">${m.name}</div>
+            <div class="meal-why">${m.why}</div>
+            <div class="meal-tags">${tagsHTML}</div>
+          </div>
+        </div>
+        <button class="recipe-toggle" onclick="toggleRecipe('${recipeId}',this)">
+          <span>Ингредиенты и рецепт</span><span>↓</span>
+        </button>
+        <div class="recipe-body" id="${recipeId}">
+          <div class="recipe-ing-title">Нужно:</div>
+          <div class="recipe-ingredients">${m.ing}</div>
+          <div class="recipe-steps-title">Как готовить:</div>
+          ${m.steps.map((s,i)=>`<div class="recipe-step"><span class="step-num">${i+1}.</span><span>${s}</span></div>`).join('')}
+        </div>
+      </div>`;
+    content.appendChild(mealBlock);
+  });
+}
+
+function toggleRecipe(id, btn) {
+  const body = document.getElementById(id);
+  body.classList.toggle('open');
+  btn.querySelector('span:last-child').textContent = body.classList.contains('open') ? '↑' : '↓';
+}
+function toggleRecipe(id, btn) {
+  const body = document.getElementById(id);
+  body.classList.toggle('open');
+  const arrow = btn.querySelector('span:last-child');
+  arrow.textContent = body.classList.contains('open') ? '↑' : '↓';
+}
 </script>
 </body>
 </html>
