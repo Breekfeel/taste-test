@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вкусовой профиль</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0a0f;
+    --card: #1a1320;
+    --border: #2e2038;
+    --accent1: #e8a0c8;
+    --accent2: #a8d8b0;
+    --accent3: #f0c080;
+    --accent4: #90c8e8;
+    --text: #f0e8f4;
+    --muted: #8a7898;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 20%, rgba(232,160,200,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(168,216,176,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-style: italic;
+    background: linear-gradient(135deg, var(--accent1), var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+  }
+
+  .header p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 48px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent1), var(--accent3));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .question-block {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .question-block.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-number {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .q-sub {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+
+  .options {
+    display: grid;
+    gap: 10px;
+  }
+
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    text-align: left;
+    color: var(--text);
+    width: 100%;
+  }
+
+  .opt:hover {
+    border-color: var(--accent1);
+    background: rgba(232,160,200,0.08);
+    transform: translateX(4px);
+  }
+
+  .opt.selected {
+    border-color: var(--accent1);
+    background: rgba(232,160,200,0.15);
+  }
+
+  .opt-emoji {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .opt-label {
+    flex: 1;
+  }
+
+  .opt-score {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* Slider questions */
+  .slider-wrap {
+    margin: 8px 0 24px;
+  }
+
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  input[type=range] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    outline: none;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--accent1);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(232,160,200,0.5);
+  }
+
+  .slider-value {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    color: var(--accent1);
+  }
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+  }
+
+  .btn {
+    padding: 12px 28px;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+
+  .btn-next {
+    background: linear-gradient(135deg, var(--accent1), #c060a0);
+    color: #0e0a0f;
+    margin-left: auto;
+  }
+
+  .btn-next:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(232,160,200,0.3);
+  }
+
+  .btn-next:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-back {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  .btn-back:hover {
+    border-color: var(--muted);
+    color: var(--text);
+  }
+
+  /* Results */
+  #results {
+    display: none;
+    animation: fadeIn 0.6s ease;
+  }
+
+  .result-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .result-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .result-type {
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .result-desc {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .taste-bars {
+    margin: 36px 0;
+    display: grid;
+    gap: 14px;
+  }
+
+  .taste-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 36px;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .taste-name {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .bar-track {
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .bar-pct {
+    font-size: 0.8rem;
+    color: var(--text);
+    text-align: right;
+  }
+
+  .insights {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 28px;
+  }
+
+  .insights h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+
+  .insight-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    align-items: flex-start;
+  }
+
+  .insight-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .superpower {
+    background: linear-gradient(135deg, rgba(232,160,200,0.1), rgba(240,192,128,0.1));
+    border: 1px solid rgba(232,160,200,0.2);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .superpower .label {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .superpower .value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    background: linear-gradient(135deg, var(--accent1), var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-restart {
+    display: block;
+    margin: 36px auto 0;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-restart:hover {
+    border-color: var(--muted);
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <h1>Вкусовой профиль</h1>
+    <p>12 вопросов · ~3 минуты</p>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <div id="quiz">
+
+    <!-- Q1 -->
+    <div class="question-block active" data-q="0">
+      <div class="q-number">Вопрос 1 из 12</div>
+      <div class="q-text">Ты ешь лимон или лайм без сахара — какова реакция?</div>
+      <div class="q-sub">Чистая кислота, никаких добавок</div>
+      <div class="options">
+        <button class="opt" data-val="5" data-cat="sour"><span class="opt-emoji">😍</span><span class="opt-label">Обожаю, могу есть просто так</span></button>
+        <button class="opt" data-val="4" data-cat="sour"><span class="opt-emoji">😊</span><span class="opt-label">Нравится, щиплет приятно</span></button>
+        <button class="opt" data-val="2" data-cat="sour"><span class="opt-emoji">😬</span><span class="opt-label">Терпимо, но не удовольствие</span></button>
+        <button class="opt" data-val="0" data-cat="sour"><span class="opt-emoji">🙅</span><span class="opt-label">Не могу, слишком резко</span></button>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-block" data-q="1">
+      <div class="q-number">Вопрос 2 из 12</div>
+      <div class="q-text">Тёмный шоколад 85%+ — как ощущается?</div>
+      <div class="q-sub">Интенсивная горечь, минимум сладкого</div>
+      <div class="options">
+        <button class="opt" data-val="5" data-cat="bitter"><span class="opt-emoji">🍫</span><span class="opt-label">Это лучшее, что есть</span></button>
+        <button class="opt" data-val="3" data-cat="bitter"><span class="opt-emoji">🤔</span><span class="opt-label">Ок, но лучше послаще</span></button>
+        <button class="opt" data-val="1" data-cat="bitter"><span class="opt-emoji">😑</span><span class="opt-label">Горькое и неприятное</span></button>
+        <button class="opt" data-val="0" data-cat="bitter"><span class="opt-emoji">🤢</span><span class="opt-label">Вообще не могу</span></button>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-block" data-q="2">
+      <div class="q-number">Вопрос 3 из 12</div>
+      <div class="q-text">Насколько ты чувствительна к сладкому?</div>
+      <div class="q-sub">Маленькая конфета — это ощущается как много или нормально?</div>
+      <div class="options">
+        <button class="opt" data-val="5" data-cat="sweet"><span class="opt-emoji">🍬</span><span class="opt-label">Одна конфета — и уже сладко, хватает мало</span></button>
+        <button class="opt" data-val="4" data-cat="sweet"><span class="opt-emoji">🍭</span><span class="opt-label">Чувствую хорошо, но хочу ещё</span></button>
+        <button class="opt" data-val="3" data-cat="sweet"><span class="opt-emoji">🎂</span><span class="opt-label">Нужно много, чтобы почувствовать</span></button>
+        <button class="opt" data-val="2" data-cat="sweet"><span class="opt-emoji">😐</span><span class="opt-label">Сладкое вообще почти не ощущаю</span></button>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-block" data-q="3">
+      <div class="q-number">Вопрос 4 из 12</div>
+      <div class="q-text">Острая еда — чили, халапеньо, острый соус</div>
+      <div class="q-sub">Оцени реакцию честно</div>
+      <div class="options">
+        <button class="opt" data-val="5" data-cat="spicy"><span class="opt-emoji">🌶️</span><span class="opt-label">Люблю жжение, чем острее — тем лучше</span></button>
+        <button class="opt" data-val="3" data-cat="spicy"><span class="opt-emoji">🔥</span><span class="opt-label">Немного остроты — окей, много — уже нет</span></button>
+        <button class="opt" data-val="1" data-cat="spicy"><span class="opt-emoji">😰</span><span class="opt-label">Даже лёгкая острота некомфортна</span></button>
+        <button class="opt" data-val="0" data-cat="spicy"><span class="opt-emoji">❌</span><span class="opt-label">Избегаю полностью</span></button>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-block" data-q="4">
+      <div class="q-number">Вопрос 5 из 12</div>
+      <div class="q-text">Пармезан, мисо, насыщенный бульон — умами</div>
+      <div class="q-sub">Глубокий, «мясной», вызывает слюноотделение</div>
+      <div class="options">
+        <button class="opt" data-val="5" data-cat="umami"><span class="opt-emoji">🧀</span><span class="opt-label">Это мой любимый вкус</span></button>
+        <button class="opt" data-val="4" data-cat="umami"><span class="opt-emoji">😋</span><span class="opt-label">Нравится, делает еду вкуснее</span></button>
+        <button class="opt" data-val="2" data-cat="umami"><span class="opt-emoji">🤷</span><span class="opt-label">Нормально, но особо не замечаю</span></button>
+        <button class="opt" data-val="1" data-cat="umami"><span class="opt-emoji">😕</span><span class="opt-label">Не очень, кажется тяжёлым</span></button>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-block" data-q="5">
+      <div class="q-number">Вопрос 6 из 12</div>
+      <div class="q-text">Ты кладёшь соль в еду?</div>
+      <div class="q-sub">Без неё что-то не то?</div>
+      <div class="options">
+        <button class="opt" data-val="5" data-cat="salty"><span class="opt-emoji">🧂</span><span class="opt-label">Всегда досаливаю, еда пресная без неё</span></button>
+        <button class="opt" data-val="4" data-cat="salty"><span class="opt-emoji">👌</span><span class="opt-label">Нравится, но не злоупотребляю</span></button>
+        <button class="opt" data-val="2" data-cat="salty"><span class="opt-emoji">😶</span><span class="opt-label">Ем как есть, соль без разницы</span></button>
+        <button class="opt" data-val="0" data-cat="salty"><span class="opt-emoji">🚫</span><span class="opt-label">Избегаю солёного</span></button>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-block" data-q="6">
+      <div class="q-number">Вопрос 7 из 12</div>
+      <div class="q-text">Кофе без сахара — как ощущается горечь?</div>
+      <div class="q-sub">Эспрессо или американо, без ничего</div>
+      <div class="options">
+        <button class="opt" data-val="5" data-cat="bitter"><span class="opt-emoji">☕</span><span class="opt-label">Пью только так, горечь = вкус</span></button>
+        <button class="opt" data-val="3" data-cat="bitter"><span class="opt-emoji">🙂</span><span class="opt-label">Терплю, но лучше с молоком/сахаром</span></button>
+        <button class="opt" data-val="1" data-cat="bitter"><span class="opt-emoji">😖</span><span class="opt-label">Горечь сильно ощущается и мешает</span></button>
+        <button class="opt" data-val="0" data-cat="bitter"><span class="opt-emoji">🙅</span><span class="opt-label">Не пью кофе из-за горечи</span></button>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-block" data-q="7">
+      <div class="q-number">Вопрос 8 из 12</div>
+      <div class="q-text">Что описывает твой идеальный десерт?</div>
+      <div class="options">
+        <button class="opt" data-val="sweet_sour" data-cat="combo"><span class="opt-emoji">🍋</span><span class="opt-label">Кисло-сладкий — лимонный тарт, ягодный мусс</span></button>
+        <button class="opt" data-val="sweet_only" data-cat="combo"><span class="opt-emoji">🍰</span><span class="opt-label">Просто сладкий — торт, шоколад, карамель</span></button>
+        <button class="opt" data-val="bitter_sweet" data-cat="combo"><span class="opt-emoji">🍫</span><span class="opt-label">Горько-сладкий — тёмный шоколад, тирамису</span></button>
+        <button class="opt" data-val="salty_sweet" data-cat="combo"><span class="opt-emoji">🧇</span><span class="opt-label">Солёно-сладкий — солёная карамель, халва</span></button>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-block" data-q="8">
+      <div class="q-number">Вопрос 9 из 12</div>
+      <div class="q-text">Насколько ты замечаешь нюансы во вкусе?</div>
+      <div class="q-sub">Например, разницу между двумя сортами шоколада или чая</div>
+      <div class="options">
+        <button class="opt" data-val="5" data-cat="sensitivity"><span class="opt-emoji">🔬</span><span class="opt-label">Замечаю всё, вкусы очень яркие и детальные</span></button>
+        <button class="opt" data-val="3" data-cat="sensitivity"><span class="opt-emoji">👁️</span><span class="opt-label">Чувствую разницу если сравниваю рядом</span></button>
+        <button class="opt" data-val="2" data-cat="sensitivity"><span class="opt-emoji">🤔</span><span class="opt-label">Редко замечаю тонкости</span></button>
+        <button class="opt" data-val="1" data-cat="sensitivity"><span class="opt-emoji">😶</span><span class="opt-label">Для меня еда либо вкусная либо нет</span></button>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-block" data-q="9">
+      <div class="q-number">Вопрос 10 из 12</div>
+      <div class="q-text">Руккола, грейпфрут, брюссельская капуста</div>
+      <div class="q-sub">Лёгкая горечь в овощах и фруктах</div>
+      <div class="options">
+        <button class="opt" data-val="4" data-cat="bitter"><span class="opt-emoji">🥗</span><span class="opt-label">Люблю эту горчинку в зелени</span></button>
+        <button class="opt" data-val="2" data-cat="bitter"><span class="opt-emoji">🫤</span><span class="opt-label">Терплю, не прям нравится</span></button>
+        <button class="opt" data-val="1" data-cat="bitter"><span class="opt-emoji">😬</span><span class="opt-label">Чувствую сильно и не нравится</span></button>
+        <button class="opt" data-val="0" data-cat="bitter"><span class="opt-emoji">🙅</span><span class="opt-label">Избегаю, горечь невыносима</span></button>
+      </div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question-block" data-q="10">
+      <div class="q-number">Вопрос 11 из 12</div>
+      <div class="q-text">Ферментированное и кислое — кимчи, квашеная капуста, кефир</div>
+      <div class="q-sub">Острокислый, «живой» вкус</div>
+      <div class="options">
+        <button class="opt" data-val="5" data-cat="sour"><span class="opt-emoji">🥒</span><span class="opt-label">Обожаю, ем постоянно</span></button>
+        <button class="opt" data-val="4" data-cat="sour"><span class="opt-emoji">😊</span><span class="opt-label">Нравится как дополнение к еде</span></button>
+        <button class="opt" data-val="2" data-cat="sour"><span class="opt-emoji">😐</span><span class="opt-label">Ок, но без фанатизма</span></button>
+        <button class="opt" data-val="0" data-cat="sour"><span class="opt-emoji">😕</span><span class="opt-label">Не моё, слишком резко</span></button>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question-block" data-q="11">
+      <div class="q-number">Вопрос 12 из 12</div>
+      <div class="q-text">Что тебя описывает лучше всего?</div>
+      <div class="options">
+        <button class="opt" data-val="adventurous" data-cat="type"><span class="opt-emoji">🌍</span><span class="opt-label">Пробую всё новое, люблю необычные вкусы</span></button>
+        <button class="opt" data-val="selective" data-cat="type"><span class="opt-emoji">🎯</span><span class="opt-label">У меня чёткие предпочтения, лишнее не нужно</span></button>
+        <button class="opt" data-val="sensory" data-cat="type"><span class="opt-emoji">✨</span><span class="opt-label">Еда — это удовольствие и ритуал</span></button>
+        <button class="opt" data-val="practical" data-cat="type"><span class="opt-emoji">⚡</span><span class="opt-label">Ем чтобы было вкусно, не заморачиваюсь</span></button>
+      </div>
+    </div>
+
+  </div><!-- /quiz -->
+
+  <div class="nav-row" id="navRow">
+    <button class="btn btn-back" id="btnBack" onclick="goBack()" style="visibility:hidden">← Назад</button>
+    <button class="btn btn-next" id="btnNext" onclick="goNext()" disabled>Далее →</button>
+  </div>
+
+  <!-- Results -->
+  <div id="results">
+    <div class="result-header">
+      <div class="result-title" id="resTitle"></div>
+      <div class="result-type" id="resType"></div>
+      <div class="result-desc" id="resDesc"></div>
+    </div>
+
+    <div class="taste-bars" id="tasteBars"></div>
+    <div class="insights" id="insightsBlock"></div>
+    <div class="superpower" id="superpowerBlock"></div>
+
+    <button class="btn-restart" onclick="restart()">Пройти заново</button>
+  </div>
+
+</div>
+
+<script>
+  const total = 12;
+  let current = 0;
+  let answers = Array(total).fill(null);
+  const scores = { sweet: 0, sour: 0, salty: 0, bitter: 0, umami: 0, spicy: 0, sensitivity: 0 };
+
+  const blocks = document.querySelectorAll('.question-block');
+
+  blocks.forEach((block, qi) => {
+    block.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        block.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        answers[qi] = { val: btn.dataset.val, cat: btn.dataset.cat };
+        document.getElementById('btnNext').disabled = false;
+      });
+    });
+  });
+
+  function updateProgress() {
+    const pct = ((current) / total) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+    document.getElementById('btnBack').style.visibility = current > 0 ? 'visible' : 'hidden';
+  }
+
+  function goNext() {
+    if (current < total - 1) {
+      blocks[current].classList.remove('active');
+      current++;
+      blocks[current].classList.add('active');
+      document.getElementById('btnNext').disabled = answers[current] === null;
+      if (current === total - 1) document.getElementById('btnNext').textContent = 'Результат ✦';
+      updateProgress();
+    } else {
+      showResults();
+    }
+  }
+
+  function goBack() {
+    if (current > 0) {
+      blocks[current].classList.remove('active');
+      current--;
+      blocks[current].classList.add('active');
+      document.getElementById('btnNext').disabled = false;
+      document.getElementById('btnNext').textContent = current === total - 1 ? 'Результат ✦' : 'Далее →';
+      updateProgress();
+    }
+  }
+
+  function showResults() {
+    // Tally scores
+    const tally = { sweet: [], sour: [], salty: [], bitter: [], umami: [], spicy: [], sensitivity: [] };
+
+    answers.forEach(a => {
+      if (!a) return;
+      const cat = a.cat;
+      const val = parseFloat(a.val);
+      if (tally[cat] !== undefined && !isNaN(val)) tally[cat].push(val);
+    });
+
+    const finalScores = {};
+    ['sweet','sour','salty','bitter','umami','spicy','sensitivity'].forEach(c => {
+      const arr = tally[c];
+      finalScores[c] = arr.length ? Math.round((arr.reduce((s,v)=>s+v,0) / (arr.length * 5)) * 100) : 50;
+    });
+
+    // Override spicy based on known preference
+    if (finalScores.spicy < 20) finalScores.spicy = Math.min(finalScores.spicy, 15);
+
+    // Detect type
+    const desertQ = answers[7];
+    const typeQ = answers[11];
+    const sensScore = finalScores.sensitivity;
+
+    let title, type, desc, typeColor;
+
+    if (finalScores.sweet >= 70 && finalScores.sour >= 60) {
+      title = 'Кисло-сладкий мечтатель';
+      type = 'Фруктово-яркий профиль';
+      typeColor = 'rgba(232,160,200,0.2)';
+      desc = 'Ты тянешься к ярким, живым вкусам. Сладкое и кислое вместе — твой пик удовольствия. Такой профиль отлично подходит для дегустации фруктов, ягодных десертов, вин и крафтовых напитков.';
+    } else if (finalScores.sweet >= 70 && finalScores.umami >= 60) {
+      title = 'Умами-сладкий баланс';
+      type = 'Глубокий вкусовой профиль';
+      typeColor = 'rgba(240,192,128,0.2)';
+      desc = 'Ты ценишь и яркие сладкие ноты, и глубину вкуса. Это профиль гурмана — умеешь различать сложные блюда и наслаждаться многоуровневым вкусом.';
+    } else if (finalScores.sour >= 70) {
+      title = 'Кислотный сенсор';
+      type = 'Острокислый профиль';
+      typeColor = 'rgba(168,216,176,0.2)';
+      desc = 'Ты особенно чувствительна к кислому — это редкое качество. Хорошо развитый кислотный вкус открывает мир ферментированных продуктов, цитрусовых, кисломолочного.';
+    } else {
+      title = 'Сладкий гедонист';
+      type = 'Сладко-солёный профиль';
+      typeColor = 'rgba(144,200,232,0.2)';
+      desc = 'Сладкое — твоя главная стихия. Умеренное восприятие горького и острого говорит о высокой чувствительности рецепторов. Такой профиль часто встречается у supertasters.';
+    }
+
+    document.getElementById('resTitle').textContent = title;
+    const typeEl = document.getElementById('resType');
+    typeEl.textContent = type;
+    typeEl.style.background = typeColor;
+    typeEl.style.border = '1px solid rgba(232,160,200,0.3)';
+    typeEl.style.color = '#e8a0c8';
+    document.getElementById('resDesc').textContent = desc;
+
+    // Bars
+    const barsData = [
+      { name: 'Сладкий', key: 'sweet', color: '#e8a0c8' },
+      { name: 'Кислый', key: 'sour', color: '#a8d8b0' },
+      { name: 'Солёный', key: 'salty', color: '#90c8e8' },
+      { name: 'Горький', key: 'bitter', color: '#8878a0' },
+      { name: 'Умами', key: 'umami', color: '#f0c080' },
+      { name: 'Острый', key: 'spicy', color: '#e89080' },
+    ];
+
+    const barsContainer = document.getElementById('tasteBars');
+    barsContainer.innerHTML = '';
+    barsData.forEach(b => {
+      const pct = finalScores[b.key];
+      const row = document.createElement('div');
+      row.className = 'taste-row';
+      row.innerHTML = `
+        <div class="taste-name">${b.name}</div>
+        <div class="bar-track"><div class="bar-fill" style="background:${b.color}" data-pct="${pct}"></div></div>
+        <div class="bar-pct">${pct}%</div>
+      `;
+      barsContainer.appendChild(row);
+    });
+
+    setTimeout(() => {
+      document.querySelectorAll('.bar-fill').forEach(el => {
+        el.style.width = el.dataset.pct + '%';
+      });
+    }, 100);
+
+    // Insights
+    const insights = [];
+
+    if (finalScores.sweet >= 70 && finalScores.bitter <= 30) {
+      insights.push({ icon: '🧬', text: 'Возможно, ты supertaster — люди с повышенным количеством вкусовых сосочков. Вы острее воспринимаете сладкое и сильнее отвергают горькое.' });
+    }
+    if (finalScores.sour >= 60) {
+      insights.push({ icon: '🍋', text: 'Высокая чувствительность к кислому — редкое качество. Твои рецепторы хорошо распознают pH пищи, что полезно при дегустации вин и цитрусовых.' });
+    }
+    if (finalScores.spicy <= 20) {
+      insights.push({ icon: '🌡️', text: 'Острота воспринимается как болевая реакция через TRPV1 рецепторы. Низкая толерантность к острому часто коррелирует с высокой чувствительностью вкусовых рецепторов.' });
+    }
+    if (finalScores.umami >= 60) {
+      insights.push({ icon: '🎯', text: 'Хорошее восприятие умами означает, что ты различаешь глутаматы — ключевой маркер качественного белка в продуктах. Пармезан, мисо и выдержанные сыры будут особенно яркими.' });
+    }
+    if (finalScores.sensitivity >= 60) {
+      insights.push({ icon: '✨', text: 'Ты замечаешь нюансы вкуса — это база для дегустации. С таким уровнем можно серьёзно развить кофейную, чайную или шоколадную дегустацию.' });
+    }
+
+    if (!insights.length) {
+      insights.push({ icon: '🍽️', text: 'Сбалансированный вкусовой профиль — ты хорошо воспринимаешь разные вкусы без экстремальных реакций.' });
+    }
+
+    const insightsEl = document.getElementById('insightsBlock');
+    insightsEl.innerHTML = '<h3>Что это значит</h3>' + insights.map(i =>
+      `<div class="insight-item"><span class="insight-icon">${i.icon}</span><span>${i.text}</span></div>`
+    ).join('');
+
+    // Superpower
+    const topKey = barsData.sort((a,b) => finalScores[b.key] - finalScores[a.key])[0];
+    const superpowers = {
+      sweet: 'Ты идеальный дегустатор десертов и кондитерских изделий',
+      sour: 'Дегустация вин, ферментированных продуктов и цитрусовых — твоя стихия',
+      salty: 'Сырная и мясная дегустация будет особенно яркой',
+      umami: 'Дегустация бульонов, выдержанных сыров и японской кухни',
+      bitter: 'Кофейная и чайная дегустация — твой потенциал',
+      spicy: 'Работа с перцами и специями',
+    };
+
+    document.getElementById('superpowerBlock').innerHTML = `
+      <div class="label">Твоя суперспособность</div>
+      <div class="value">${superpowers[topKey.key] || 'Развитый вкус'}</div>
+    `;
+
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('navRow').style.display = 'none';
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('progress').style.width = '100%';
+  }
+
+  function restart() {
+    current = 0;
+    answers = Array(total).fill(null);
+    blocks.forEach(b => b.classList.remove('active'));
+    blocks[0].classList.add('active');
+    blocks[0].querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
+    document.getElementById('btnNext').disabled = true;
+    document.getElementById('btnNext').textContent = 'Далее →';
+    document.getElementById('quiz').style.display = 'block';
+    document.getElementById('navRow').style.display = 'flex';
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('progress').style.width = '0%';
+    document.getElementById('btnBack').style.visibility = 'hidden';
+  }
+</script>
+</body>
+</html>
